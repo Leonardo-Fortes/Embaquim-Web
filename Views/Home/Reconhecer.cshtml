@@ -1,5 +1,55 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
+<section class="box-reconhecer">
+    <div>
+        <h1>Reconheça alguém</h1>
+        <h3 class="py-5">Quem você quer reconhecer hoje?</h3>
+        <div style="margin-left: 90px;">
+            <!-- Ajuste na estilização -->
+            <div style="position: relative;">
+                <a href="#"><i class="fa-solid fa-user-plus icon-adduser"></i></a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h5 class="fw-bolder" style="padding-top: 50px; padding-bottom: 10px;">Deixe uma mensagem para expressar o seu reconhecimento</h5>
+    </div>
+    <div class="editor">
+
+        <textarea class="input-text-placeholder " placeholder="Escreva aqui o comportamento que foi observado"></textarea>
+    </div>
+    <!-- Inicio Pontos Para Entregar -->
+    <section class="Pontos para entregar">
+        <p class="fw-bolder py-3">Quantos pontos você quer distribuir ?</p>
+        <div class="d-flex">
+            <div class="">
+                <p class="fw-bolder" style="margin-bottom: 0px; color: gray;">Pontos por Pessoa</p>
+                <input class="form-control fw-bolder" style="border: 1px solid darkblue; text-align: center; width:150px" type="text" name="">
+            </div>
+
+            <div class="mx-4">
+                <p class="fw-bolder " style="margin-bottom: 0px; color: gray;">Total de Pontos</p>
+                <input class="form-control fw-bolder" type="text" placeholder="320" style="border: 1px solid darkblue; width:120px; text-align: center;" disabled>
+            </div>
+        </div>
+    </section>
+    <!-- Fim Pontos Para Entregar -->
+</section>
+<!-- FIM Reconheça Alguém -->
+<!-- Inicio Conteúdo Lateral -->
+<section class="box-avisos bg-white d-flex  justify-content-center ">
+    <inside class="container px-3">
+        <h5 class="fw-bolder py-3 px-2" style="position: relative;">
+            <i class="fa-solid fa-lightbulb" style="position: absolute; top: 18px; left: -10px; color: black;"></i>
+            Dica para reconhecimento
+        </h5>
+        <div>
+            <p class="text-danger">
+                <strong>Evite:</strong> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+            </p>
+            <hr>
+            <p>
+                <strong>Experimente:</strong> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+            </p>
+        </div>
+    </inside>
+</section>

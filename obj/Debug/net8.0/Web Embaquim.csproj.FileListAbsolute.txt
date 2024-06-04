@@ -1,0 +1,31 @@
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\bin\Debug\net8.0\appsettings.json
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\bin\Debug\net8.0\Web Embaquim.staticwebassets.runtime.json
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\bin\Debug\net8.0\Web Embaquim.exe
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\bin\Debug\net8.0\Web Embaquim.deps.json
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\bin\Debug\net8.0\Web Embaquim.runtimeconfig.json
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\bin\Debug\net8.0\Web Embaquim.dll
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\bin\Debug\net8.0\Web Embaquim.pdb
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\Web Embaquim.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\Web Embaquim.AssemblyInfoInputs.cache
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\Web Embaquim.AssemblyInfo.cs
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\Web Embaquim.csproj.CoreCompileInputs.cache
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\Web Embaquim.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\Web Embaquim.RazorAssemblyInfo.cache
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\Web Embaquim.RazorAssemblyInfo.cs
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\Web Embaquim.sourcelink.json
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\staticwebassets\msbuild.Web Embaquim.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\staticwebassets\msbuild.build.Web Embaquim.props
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Web Embaquim.props
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Web Embaquim.props
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\scopedcss\bundle\Web Embaquim.styles.css
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\scopedcss\projectbundle\Web Embaquim.bundle.scp.css
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\Web Embaquim.dll
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\refint\Web Embaquim.dll
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\Web Embaquim.pdb
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\Web Embaquim.genruntimeconfig.cache
+C:\Users\leonardo\source\repos\Web Embaquim\Web Embaquim\obj\Debug\net8.0\ref\Web Embaquim.dll

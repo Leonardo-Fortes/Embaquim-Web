@@ -23,6 +23,15 @@ namespace Web_Embaquim.Controllers
             return View();
         }
 
+        public IActionResult Perfil()
+        {
+            return View();
+        }
+
+        public IActionResult Reconhecer() 
+        {
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

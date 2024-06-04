@@ -7,4 +7,8 @@
     <RootNamespace>Web_Embaquim</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Imagens\" />
+  </ItemGroup>
+
 </Project>

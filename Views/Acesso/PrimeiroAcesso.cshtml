@@ -1,5 +1,85 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    Layout = null;
 }
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Embaquim demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="~/css/site.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container fundo-branco" style="">
+            <div class="d-flex flex-column ">
+                <h1 class="fw-bolder py-3">Bem Vindo!</h1>
+                <h4 class="fw-bolder py-3">Falta pouco para acessar, antes vamos criar o seu perfil ?</h4>
+                <p class="fw-bolder"> Como você gostaria de ser chamado ?</p>
+                <div class="input-group">
+                    <input class="form-control my-2" style="border: 1px solid black;" type="text" name="">
+                </div>
+                <div class="form-group">
+                    <label class="fw-bolder py-2" for="cargos">Escolha um cargo:</label>
+                    <div class="input-group">
+                        <select class="custom-select" id="cargos" name="cargos">
+                            <option value="analista">Auxiliar Produção</option>
+                            <option value="desenvolvedor">Desenvolvedor</option>
+                            <option value="gerente">Gerente</option>
+                            <option value="estagiario">Estagiário</option>
+                            <!-- Adicione mais opções conforme necessário -->
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+            <!-----Inicio Foto De Perfil-->
+            <section class="foto-de-perfil">
+                <div>
+                    <hr>
+                    <h5 class="fw-bolder my-3">
+                        Fotos de perfil</h4>
+                        <p class="fw-bolder">Escolha uma foto do seu dispositivo</p>
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Buscar imagem no seu dispositivo" disabled>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-primary fw-bolder"> Anexar arquivo</button>
+                            </div>
+                        </div>
+                </div>
+                <!-----Inicio Imagens Opcionais-->
+                <div class="row  py-4">
+                    <div class="col  ">
+                        <img class="img-perfis bg-success" src="~/imagens\perfil-teste.jfif">
+                    </div>
+                    <div class="col">
+                        <img class="img-perfis" src="~/imagens\perfil-1.jfif">
+                    </div>
+                    <div class="col">
+                        <img class="img-perfis" src="~/imagens\perfil-2.jfif">
+                    </div>
+                    <div class="col">
+                        <img class="img-perfis" src="~/imagens\perfil-3.jfif">
+                    </div>
+                    <div class="col">
+                        <img class="img-perfis" src="~/imagens\perfil-4.jfif">
+                    </div>
+                    <div class="col">
+                        <img class="img-perfis" src="~/imagens\perfil-5.jfif">
+                    </div>
+                </div>
+                <!-----Fim Imagens Opcionais-->
+            </section>
+            <!-----Fim Foto De Perfil-->
+            <div class="d-flex justify-content-start " style="margin-top: 40px;">
+                <button type="button" class="btn btn-primary">Finalizar Cadastro</button>
+            </div>
+        </div>
+
+    </header>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

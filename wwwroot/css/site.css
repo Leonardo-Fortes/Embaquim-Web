@@ -1,22 +1,364 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+* {
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 body {
-  margin-bottom: 60px;
+    background: white;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.logo-index {
+    height: 40px;
+}
+
+
+.bgLogin {
+    background-image: radial-gradient(circle at 50% -20.71%, #0cafff 0, #0062a3 50%, #001f3d 100%);
+    width: 100%;
+    height: 100vh;
+    background-attachment: fixed;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+}
+
+.container-login {
+    display: flex;
+    width: 350px;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 15px 0 15px;
+}
+
+.top-header span {
+    font-size: small;
+    height: 260px;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 10px 0;
+}
+
+
+.input-login {
+    height: 45px;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    color: #fff;
+    padding: 0 0 0 45px;
+    background: rgba(255,255,255,0.1);
+}
+
+i {
+    position: relative;
+    top: -34px;
+    left: 17px;
+    color: #fff;
+}
+
+::-webkit-input-placeholder {
+    color: #fff;
+}
+
+.input-submit {
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    height: 45px;
+    outline: none;
+    width: 100%;
+    background: rgba(255,255,255,0.7);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.link-navegacao {
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    color: black;
+    justify-content: center;
+}
+
+.input-submit:hover {
+    box-shadow: 1px 5px 7px 1px rgba(0,0,0,0.2);
+}
+
+@media (min-width: 576px ) {
+    .navbar-nav .nav-item::after {
+        content: '';
+        position: absolute;
+        bottom: 0.3rem;
+        left: 50%;
+        width: 0;
+        height: 0.2rem;
+        background: white;
+        transition: all 300ms ease-in-out;
+    }
+
+    .navbar-nav .nav-item:hover::after {
+        width: 50%;
+        left: 25%;
+        color: black;
+    }
+}
+
+.navbar-nav .nav-item {
+    position: relative;
+}
+
+    .navbar-nav .nav-item .nav-link:hover {
+        color: darkblue;
+    }
+
+    .navbar-nav .nav-item .nav-link {
+        color: #fff;
+    }
+
+
+
+.box-fundo-perfil {
+    background: white;
+    padding: 10px 0 10px 5px;
+    border-bottom: 1px solid #adb5bd;
+    border-top: 1px solid #adb5bd;
+}
+
+.box-imagem {
+    background: black;
+    width: 50px;
+    height: 50px;
+}
+
+.box-imagem-perfil {
+    background: black;
+}
+
+.name-perfil {
+    font-size: 15px;
+    padding: 0 0 0 10px;
+    font-weight: bold;
+}
+
+.pontuacao-perfil {
+    font-size: 15px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.sidebar-sticky .nav-item .nav-link {
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    display: block;
+    color: rgba(200, 200, 200, 1);
+    justify-content: center;
+    padding-left: 40px;
+    position: relative;
+}
+
+    .sidebar-sticky .nav-item .nav-link:hover {
+        color: darkblue;
+    }
+
+
+.icon-position {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    color: gray;
+}
+
+.sidebar-sticky .nav-item .nav-link:hover .icon-position {
+    color: darkblue;
+}
+
+
+
+
+.pontos-fundo {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.75);
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+@media (max-width: 991px) {
+    .pontos-fundo {
+        margin-right: 30px;
+    }
+}
+
+.fundo-branco {
+    margin-top: 80px;
+    margin-bottom: 80px;
+    box-shadow: 1px 5px 7px 1px rgba(0,0,0,0.2);
+    background: white;
+    width: 900px;
+    padding: 50px;
+}
+
+p {
+    margin-bottom: 5px;
+}
+
+.img-perfis {
+    width: 100px;
+    height: 100px;
+}
+
+.img-fundo {
+    max-width: 100%;
+    height: auto;
+    "
+}
+
+@media (min-width: 768px) {
+    .img-fundo {
+        /* Estilos para telas maiores que 768px */
+        /* Por exemplo, você pode definir largura máxima para que a imagem não se estique além de uma certa largura */
+        max-width: 100%; /* ou outra largura máxima desejada */
+        height: auto; /* Isso mantém a proporção da imagem */
+        /* Outros estilos que você deseja aplicar à imagem */
+    }
+}
+
+@media (max-width: 767px) {
+    .img-fundo {
+        display: none; /* Isso esconde a imagem em telas menores que 768 pixels */
+    }
+}
+
+@media (max-width: 767px) {
+    .nav-inside {
+        display: none;
+    }
+}
+
+.icon-adduser {
+    position: absolute;
+    top: -30px;
+    left: -90px;
+    color: black;
+    font-size: 40px;
+}
+
+.editor {
+    width: 100%;
+}
+
+.input-text-placeholder {
+    width: 100%;
+    height: 150px; /* Altura desejada */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+    .input-text-placeholder::placeholder {
+        font-family: var(--fonte-principal);
+        color: gray;
+        background: url("../style/Vector.png") no-repeat;
+        text-align: start; /*Nova linha adicionada*/
+    }
+
+
+.box-reconhecer {
+    margin: 1px 5px;
+    margin-left: 0px;
+    background: white;
+    width: 800px;
+    padding: 50px;
+}
+
+.box-avisos {
+    width: 320px;
+    margin-left: auto;
+    box-shadow: 1px 5px 7px 1px rgba(0,0,0,0.2);
+}
+
+.sidebar {
+    overflow-y: auto;
+    padding-right: 0px;
+}
+
+.desafios {
+    background-image: url('../imagens/bg-curso.png');
+    background-position: center top;
+    background-repeat: no-repeat;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Estilos para o contêiner dos desafios */
+.container-desafio {
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo com opacidade */
+    color: white; /* Cor do texto */
+    backdrop-filter: blur(10px);
+    border: 1px solid white;
+}
+
+/* Estilos para a imagem do curso */
+.imagem-curso {
+    width: 100%;
+    height: auto;
+    opacity: 0.9;
+}
+
+.logo-curso {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    "
+}
+
+.d-flex.justify-content-between b {
+    color: red; /* Define a cor vermelha */
+}
+
+@media (max-width: 991px) {
+    .media-img {
+        display: none;
+    }
+}
+
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Transparência para o fundo escuro */
+}
+
+.formulario {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
