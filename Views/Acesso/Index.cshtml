@@ -1,5 +1,15 @@
-﻿
-@{    
+﻿@{
+    var mensagemErro = TempData["MensagemErro"] as string;
+}
+
+@if (!string.IsNullOrEmpty(mensagemErro))
+{
+    <div class="alert alert-danger" role="alert">
+        @mensagemErro
+    </div>
+}
+
+@{
     ViewData["Title"] = "Index";
     Layout = null;
 }
@@ -21,18 +31,18 @@
         <div class="container-login ">
             <div class="top-header">
                 <span>
-                    <img src=".//imagens/logo2.png" alt="Logo Embaquim">
+                    <img src="~/Imagens/logo2.png" alt="Logo Embaquim">
                 </span>
             </div>
 
-            <form action="/Home">
+            <form action="Acesso/ChecarLogin" method="post">
                 <div class="input-field">
-                    <input type="text" class="input-login" placeholder="Usuário" required />
+                    <input type="text" class="input-login" name="usuario" id="usuario" placeholder="Usuário" required />
                     <i class="bi bi-person-circle"></i>
                 </div>
 
                 <div class="input-field">
-                    <input type="password" class="input-login" placeholder="Senha" required />
+                    <input type="password" class="input-login" name="senha" id="senha" placeholder="Senha" required />
                     <i class="bi bi-file-lock2"></i>
                 </div>
 
