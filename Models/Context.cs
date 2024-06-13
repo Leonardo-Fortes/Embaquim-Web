@@ -9,5 +9,6 @@ namespace Web_Embaquim.Models
 
         }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Cursos> Cursos { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using Web_Embaquim.Models;
 
 namespace Web_Embaquim.Controllers
@@ -6,10 +7,12 @@ namespace Web_Embaquim.Controllers
     public class AcessoController : Controller
     {
         private readonly Context _context;
+      
         public AcessoController(Context context)
         {
             _context = context;
         }
+      
 
         public IActionResult Index()
         {
@@ -20,15 +23,20 @@ namespace Web_Embaquim.Controllers
             return View();
         }
 
+
+     
+
         [HttpPost]
         public IActionResult ChecarLogin(string usuario, string senha)
         {
-            // Crie uma instância da classe Login e defina os parâmetros
+            
             var login = new VerificaUsuario(_context)
             {
                 Usuario = usuario,
                 Senha = senha,
             };
+
+
 
             // Realize a autenticação
             if (login.VerificaLogin())
@@ -43,5 +51,7 @@ namespace Web_Embaquim.Controllers
             }
 
         }
+
+   
     }
 }

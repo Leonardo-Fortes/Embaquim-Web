@@ -16,7 +16,7 @@
         public static int IdFunc { get; set; }
 
 
-      public bool VerificaLogin()
+        public bool VerificaLogin()
         {
             var usuarioFunc = _context.Usuarios.Where(u => u.Name == this.Usuario && u.Senha == this.Senha)
                 .Select(u => new
@@ -25,7 +25,7 @@
                 })
                 .FirstOrDefault();
 
-            if(usuarioFunc != null)
+            if (usuarioFunc != null)
             {
                 IdFunc = usuarioFunc.Id;
                 return true;
@@ -33,10 +33,7 @@
 
             IdFunc = 0;
             return false;
-            
+
         }
-
     }
-
-
 }
