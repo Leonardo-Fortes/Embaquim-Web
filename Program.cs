@@ -7,6 +7,7 @@ using Web_Embaquim.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<VerificaUsuario>();
+builder.Services.AddScoped<Cursos>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

@@ -17,6 +17,8 @@ namespace Web_Embaquim.Models
         [Column("desCurso")]
         public string DescCurso { get; set; }
 
+        [Column("duracaoCurso")]
+        public TimeSpan DuracaoCurso { get; set; }
 
         [Column("dataFim")]
         public DateTime DataFim { get; set; }

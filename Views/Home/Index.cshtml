@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Web_Embaquim.Models.CursoViewModel;
+@{
     ViewData["Title"] = "Home";
 }
 <img class="img-fundo" src="~/Imagens/embaquim_cover.jfif">
@@ -47,13 +48,13 @@
             <div class="col-8 text-center container-desafio " style="margin-top: 200px; margin-bottom: 100px;">
                 <div style="border: 1px solid white;  ">
                     <h5 class=" py-5">
-                        <strong>Tema: </strong><span id="AntTema"> Introdução aos Conceitos de Gênero - FGV Educação Corporativa</span>
+                        <strong>Tema: </strong><span id="AntTema">@Model.Tema</span>
                     </h5>
                 </div>
 
                 <div style="border: 1px solid white;" class="my-3">
                     <h5 class=" py-5 my-5">
-                        <strong>Descrição:</strong><span id="AntDescricao"> Introdução aos Conceitos de Gênero - FGV Educação Corporativa</span>
+                        <strong>Descrição:</strong><span id="AntDescricao">@Model.Descricao</span>
                     </h5>
                 </div>
                 <div>
@@ -61,14 +62,15 @@
                         <p class="py-3">
                             <a class="btn btn-outline-primary " style="margin-top: 20px; border: 1px solid white; color: white" href="https://educacao-executiva.fgv.br/cursos/online/curta-media-duracao-online/introducao-aos-conceitos-de-genero">Clique aqui para acessar o link</a>
                         </p>
-                        <button class="btn btn-info" style="margin-left: auto; height: 35px" abrirFormulario()">Abrir Painel de Administração</button>
+                        <button onclick="abrirFormulario()" class="btn btn-info" style="margin-left: auto; height: 35px">Abrir Painel de Administração</button>
                     </div>
                 </div>
 
 
-                <div class="d-flex justify-content-between">
-                    <span class="">Duração: <span id="AntDuracaoHr" class="fw-bolder" style="color: red;"></span><span> : </span><span id="AntDuracaoMin" class="fw-bolder" style="color: red"></span></span>
-                    <span class="" id="">Pontos:  <span id="AntPontos" class="fw-bolder " style="color: red;">20</span></span>
+                <div class="d-flex justify-content-between my-3">
+                    <span class="">Duração: <span id="AntDuracaoHr" class="fw-bolder" style="color: red;">@Model.DuracaoHr</span></span>
+                    <span class="" id="">Pontos:  <span id="AntPontos" class="fw-bolder " style="color: red;">@Model.Pontos</span></span>
+                    <span class="" id="">Prazo: <span id="AntDataFim" class="fw-bolder " style="color: red;">@Model.DataFim.ToString("dd/MM/yyyy")</span></span>
                 </div>
             </div>
         </div>
@@ -85,15 +87,16 @@
                     <label for="tema">Tema:</label>
                     <input type="text" id="Tema" name="Tema" class="fw-bolder" style="width: 100%"><br><br>
                     <label for="descricao">Descricao:</label>
-                    <input type="text" id="Descricao" name="Descricao" class="fw-bolder" style="width: 100%"><br><br>
+                    <input type="text" id="Descricao"  name="Descricao" class="fw-bolder" style="width: 100%"><br><br>
                     <div class="d-flex" style="height:25px; margin-bottom: 10px;">
                         <label for="duracao">Duração: </label>
                         <input type="text" id="DuracaoHr" name="duracao" class="fw-bolder" placeholder="Hrs" style="width:40px; margin-left: 4px;"><span class="fw-bolder">:</span>
-                        <input type="text" id="DuracaoMin" name="duracao" class="fw-bolder" style="width:40px;"><br><br>
                         <label for="Pontos" style="margin-left: auto;">Pontos: </label>
-                        <input type="text" id="Pontos" name="Pontos" class="fw-bolder" style="width:40px; margin-left: 4px;">
+                        <input type="text" id="Pontos" name="Pontos"  class="fw-bolder" style="width:40px; margin-left: 4px;">
+                        <label for="DataFim" style="margin-left: auto;">Ultima Dia para entrega </label>
+                        <input type="date" id="DataFim" name="DataFim"  class="fw-bolder" style="width:40px; margin-left: 4px;">
                     </div>
-                    <input type="button" value="Alterar Conteúdo" onclick="alterarConteudo()" style="padding: 0px 5px">
+                    <input type="button" value="Alterar Conteúdo" onclick="alterarConteudo(event)" style="padding: 0px 5px">
                     <button type="button" onclick="fecharFormulario()" style="margin-left: 14px; padding: 0px 5px">Fechar</button>
                 </form>
             </div>

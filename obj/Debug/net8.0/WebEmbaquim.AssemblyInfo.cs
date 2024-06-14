@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebEmbaquim")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b53c68c86a7cfe0850dc04ec1cd93cbf0f51cbb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+db3ed198514914017fcd604acaa9ce0f4b1249d5")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebEmbaquim")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebEmbaquim")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
