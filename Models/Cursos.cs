@@ -26,5 +26,8 @@ namespace Web_Embaquim.Models
         [Column("pontosCurso")]
         public int PontosCurso { get; set; }
 
+        [Column("linkCurso")]
+        public string LinkCurso { get; set; }
+
     }
 }

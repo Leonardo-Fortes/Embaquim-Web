@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -46,6 +47,7 @@ namespace Web_Embaquim.Controllers
                     cursoExistente.DuracaoCurso = duracao; // Use the parsed TimeSpan
                     cursoExistente.DataFim = model.DataFim;
                     cursoExistente.PontosCurso = model.Pontos;
+                    cursoExistente.LinkCurso = model.LinkCurso;
 
                     // Salvar as alterações
                     _context.Cursos.Update(cursoExistente);
@@ -59,7 +61,8 @@ namespace Web_Embaquim.Controllers
                         DescCurso = model.Descricao,
                         DuracaoCurso = duracao, // Use the parsed TimeSpan
                         DataFim = model.DataFim,
-                        PontosCurso = model.Pontos
+                        PontosCurso = model.Pontos,
+                        LinkCurso = model.LinkCurso
                     };
 
                     _context.Cursos.Add(novoCurso);
@@ -73,20 +76,25 @@ namespace Web_Embaquim.Controllers
             return Json(new { success = false });
         }
 
-
+       
         public IActionResult Index()
         {
             var curso = _context.Cursos.FirstOrDefault();
-            var viewModel = new CursoViewModel
-            {
-                Tema = curso.TemaCurso,
-                Descricao = curso.DescCurso,
-                DuracaoHr = curso.DuracaoCurso.ToString(@"hh\:mm"), // Converte TimeSpan para string no formato "hh:mm"
-                DataFim = curso.DataFim,
-                Pontos = curso.PontosCurso
-            };
+           
+                var viewModel = new CursoViewModel
+                {
+                    Tema = curso.TemaCurso,
+                    Descricao = curso.DescCurso,
+                    DuracaoHr = curso.DuracaoCurso.ToString(@"hh\:mm"), // Converte TimeSpan para string no formato "hh:mm"
+                    DataFim = curso.DataFim,
+                    Pontos = curso.PontosCurso,
+                    LinkCurso = curso.LinkCurso
 
-            return View(viewModel);
+                };
+
+                return View(viewModel);
+            
+            
         }
 
         public IActionResult Privacy()

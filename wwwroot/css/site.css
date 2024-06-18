@@ -49,7 +49,8 @@ h1, h2, h3, h4, h5 {
     height: 260px;
     display: flex;
     justify-content: center;
-    padding: 10px 0 10px 0;
+    padding: 5px 0 10px 0;
+    margin-bottom: 40px;
 }
 
 
@@ -182,6 +183,15 @@ i {
     top: 10px;
     left: 15px;
     color: gray;
+}
+
+.icon-adm {
+    position: relative;
+    color: red;
+    left: 100%;
+    top: -60px;
+    font-size: 30px;
+    cursor: pointer;
 }
 
 .sidebar-sticky .nav-item .nav-link:hover .icon-position {
@@ -358,7 +368,7 @@ p {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }

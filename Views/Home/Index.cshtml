@@ -1,4 +1,4 @@
-﻿@model Web_Embaquim.Models.CursoViewModel;
+﻿@model Web_Embaquim.Models.CursoViewModel; // Passando parametros do CursoViewModel para os input através do Razor
 @{
     ViewData["Title"] = "Home";
 }
@@ -60,7 +60,7 @@
                 <div>
                     <div>
                         <p class="py-3">
-                            <a class="btn btn-outline-primary " style="margin-top: 20px; border: 1px solid white; color: white" href="https://educacao-executiva.fgv.br/cursos/online/curta-media-duracao-online/introducao-aos-conceitos-de-genero">Clique aqui para acessar o link</a>
+                            <a class="btn btn-outline-primary" id="AntLink" style="margin-top: 20px; border: 1px solid white; color: white" href="@Model.LinkCurso">Clique aqui para acessar o link</a>
                         </p>
                         <button onclick="abrirFormulario()" class="btn btn-info" style="margin-left: auto; height: 35px">Abrir Painel de Administração</button>
                     </div>
@@ -75,13 +75,14 @@
             </div>
         </div>
     </div>
-    </div>
+    
     <!-- Formulário Administração -->
 
     <div id="overlay" class="overlay">
-        <div id="formulario" class="formulario ">
+        <div id="formulario" class="formulario" style="position: absolute">
 
             <h2>Formulário de Administração</h2>
+            <a onclick="fecharFormulario()"><i class="fa-solid fa-xmark icon-adm"></i></a>
             <div class="d-flex justify-content-between">
                 <form method="post" style="width: 100%">
                     <label for="tema">Tema:</label>
@@ -90,14 +91,16 @@
                     <input type="text" id="Descricao"  name="Descricao" class="fw-bolder" style="width: 100%"><br><br>
                     <div class="d-flex" style="height:25px; margin-bottom: 10px;">
                         <label for="duracao">Duração: </label>
-                        <input type="text" id="DuracaoHr" name="duracao" class="fw-bolder" placeholder="Hrs" style="width:40px; margin-left: 4px;"><span class="fw-bolder">:</span>
+                        <input type="text" id="DuracaoHr" name="duracao" class="fw-bolder" placeholder="Hrs" style="width:40px; margin-left: 4px;">
                         <label for="Pontos" style="margin-left: auto;">Pontos: </label>
                         <input type="text" id="Pontos" name="Pontos"  class="fw-bolder" style="width:40px; margin-left: 4px;">
-                        <label for="DataFim" style="margin-left: auto;">Ultima Dia para entrega </label>
-                        <input type="date" id="DataFim" name="DataFim"  class="fw-bolder" style="width:40px; margin-left: 4px;">
+                        <label for="DataFim" style="margin-left: auto;">Prazo: </label>
+                        <input type="date" id="DataFim" name="DataFim" class="fw-bolder" style="width:100px; margin-left: 4px;">
                     </div>
-                    <input type="button" value="Alterar Conteúdo" onclick="alterarConteudo(event)" style="padding: 0px 5px">
-                    <button type="button" onclick="fecharFormulario()" style="margin-left: 14px; padding: 0px 5px">Fechar</button>
+                    <label for="LinkCurso">Endereço do Curso</label>
+                    <input type="text" id="LinkCurso" name="LinkCurso">
+
+                    <input type="button" value="Alterar Conteúdo" onclick="alterarConteudo(event)" style="padding: 0px 5px;">
                 </form>
             </div>
         </div>
