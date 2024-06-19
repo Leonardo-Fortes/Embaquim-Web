@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,6 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<VerificaUsuario>();
 builder.Services.AddScoped<Cursos>();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Acesso/Index"; // Caminho para a página de login
+        options.AccessDeniedPath = "/Acesso/Index";
+    });
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -45,7 +52,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

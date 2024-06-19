@@ -6,6 +6,7 @@ using Web_Embaquim.Models;
 
 namespace Web_Embaquim.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -76,7 +77,7 @@ namespace Web_Embaquim.Controllers
             return Json(new { success = false });
         }
 
-       
+      
         public IActionResult Index()
         {
             var curso = _context.Cursos.FirstOrDefault();
