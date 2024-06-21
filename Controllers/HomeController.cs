@@ -112,6 +112,23 @@ namespace Web_Embaquim.Controllers
         {
             return View();
         }
+        public IActionResult ControleUsuario()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult PreCadastroUsuario([FromBody] CadastroViewModel cadastro)
+        {
+            if (cadastro == null)
+            {
+                return BadRequest();
+            }
+
+            // Aqui você pode salvar os dados em um banco de dados ou fazer o processamento necessário
+
+            return Ok(new { status = "success" });
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

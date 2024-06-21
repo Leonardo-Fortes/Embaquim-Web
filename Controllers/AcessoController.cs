@@ -34,8 +34,8 @@ namespace Web_Embaquim.Controllers
             {
                 // Configurar o cookie de autenticação
                 var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, usuario)
+                {
+                    new Claim(ClaimTypes.Name, usuario)
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

@@ -1,4 +1,13 @@
-﻿//Chamando função do CSS para abrir o Formulario administrativo
+﻿
+function abrirFormularioLogin() {
+    document.getElementById("overlay-login").style.display = "block";
+}
+
+function fecharFormularioLogin() {
+    document.getElementById("overlay-login").style.display = "none";
+}
+
+//Chamando função do CSS para abrir o Formulario administrativo
 function abrirFormulario() {
     document.getElementById("overlay").style.display = "block";
 }
@@ -55,3 +64,85 @@ function alterarConteudo(event) {
     });
 }
 
+// Controle Usuário
+
+function EnviarCadastro() {
+    // Obter os valores do formulário
+    const nome = document.getElementById('NomeCad').value;
+    const sobrenome = document.getElementById('SobrenomeCad').value;
+    const cpf = document.getElementById('CpfCad').value;
+    const dataNascimento = document.getElementById('DataNasciCad').value;
+    const funcao = document.getElementById('FuncaoCad').value;
+    const email = document.getElementById('EmailCad').value;
+
+    // Verificar se todos os campos foram preenchidos
+    if (!nome || !sobrenome || !cpf || !dataNascimento || !funcao || !email) {
+        alert("Por favor, preencha todos os campos.");
+        return;
+    }
+
+    // Armazenar os dados no localStorage
+    const solicitacoes = JSON.parse(localStorage.getItem('solicitacoes')) || [];
+    solicitacoes.push({ nome, sobrenome, cpf, dataNascimento, funcao, email });
+    localStorage.setItem('solicitacoes', JSON.stringify(solicitacoes));
+
+    // Limpar o formulário original
+    document.getElementById('userForm').reset();
+
+    // Redirecionar para a página de solicitações
+    
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const solicitacoesContainer = document.getElementById('solicitationsContainer');
+    const solicitacoes = JSON.parse(localStorage.getItem('solicitacoes')) || [];
+
+    solicitacoes.forEach((solicitacao, index) => {
+        const newForm = document.createElement('form');
+        newForm.className = 'input-cad';
+        newForm.innerHTML = `
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex flex-column">
+                            <label for="NomeCad">Nome </label>
+                            <input class="" type="text" name="NomeCad" value="${solicitacao.nome}" disabled><br>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <label for="SobrenomeCad">Sobrenome </label>
+                            <input type="text" name="SobrenomeCad" value="${solicitacao.sobrenome}" disabled><br>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <label for="CpfCad">CPF</label>
+                            <input type="text" name="CpfCad" value="${solicitacao.cpf}" disabled><br>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex flex-column">
+                            <label for="DataNasciCad">Data de nascimento</label>
+                            <input type="date" name="DataNasciCad" value="${solicitacao.dataNascimento}" disabled><br>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <label for="FuncaoCad">Função </label>
+                            <input type="text" name="FuncaoCad" value="${solicitacao.funcao}" disabled><br>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <label for="EmailCad">Email </label>
+                            <input type="email" name="EmailCad" value="${solicitacao.email}" disabled><br>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-danger mx-2" onclick="recusarSolicitacao(${index})">Recusar</button>
+                        <button type="button" class="btn btn-primary d-flex">Aceitar</button>
+                    </div>
+                    <hr>
+                `;
+        solicitacoesContainer.appendChild(newForm);
+    });
+});
+
+function recusarSolicitacao(index) {
+    const solicitacoes = JSON.parse(localStorage.getItem('solicitacoes')) || [];
+    solicitacoes.splice(index, 1);
+    localStorage.setItem('solicitacoes', JSON.stringify(solicitacoes));
+    window.location.reload();  // Recarrega a página para atualizar a lista
+}

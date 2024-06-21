@@ -75,34 +75,43 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Formulário Administração -->
 
     <div id="overlay" class="overlay">
         <div id="formulario" class="formulario" style="position: absolute">
 
-            <h2>Formulário de Administração</h2>
+            <h2 class="d-flex justify-content-center">Formulário de Administração</h2>
             <a onclick="fecharFormulario()"><i class="fa-solid fa-xmark icon-adm"></i></a>
-            <div class="d-flex justify-content-between">
-                <form method="post" style="width: 100%">
-                    <label for="tema">Tema:</label>
-                    <input type="text" id="Tema" name="Tema" class="fw-bolder" style="width: 100%"><br><br>
-                    <label for="descricao">Descricao:</label>
-                    <input type="text" id="Descricao"  name="Descricao" class="fw-bolder" style="width: 100%"><br><br>
-                    <div class="d-flex" style="height:25px; margin-bottom: 10px;">
-                        <label for="duracao">Duração: </label>
-                        <input type="text" id="DuracaoHr" name="duracao" class="fw-bolder" placeholder="Hrs" style="width:40px; margin-left: 4px;">
-                        <label for="Pontos" style="margin-left: auto;">Pontos: </label>
-                        <input type="text" id="Pontos" name="Pontos"  class="fw-bolder" style="width:40px; margin-left: 4px;">
-                        <label for="DataFim" style="margin-left: auto;">Prazo: </label>
-                        <input type="date" id="DataFim" name="DataFim" class="fw-bolder" style="width:100px; margin-left: 4px;">
-                    </div>
-                    <label for="LinkCurso">Endereço do Curso</label>
-                    <input type="text" id="LinkCurso" name="LinkCurso">
 
-                    <input type="button" value="Alterar Conteúdo" onclick="alterarConteudo(event)" style="padding: 0px 5px;">
-                </form>
-            </div>
+            <form method="post" style="width: 100%">
+                <div class="form-group">
+                    <label for="tema">Tema:</label>
+                    <input type="text" id="Tema" name="Tema" class="fw-bolder form-control" style="width: 100%"><br>
+                </div>
+                <div class="form-group">
+                    <label for="descricao">Descricao:</label>
+                    <input type="text" id="Descricao" name="Descricao" class="fw-bolder form-control" style="width: 100%"><br>
+                </div>
+                <div class="form-group">
+                    <label for="duracao">Duração: </label>
+                    <input type="text" id="DuracaoHr" name="duracao" class="fw-bolder form-control" placeholder="Hrs" style="width:80px;"><br>
+                </div>
+                <div class="form-group">
+                    <label for="DataFim">Prazo: </label>
+                    <input type="date" id="DataFim" name="DataFim" class="fw-bolder form-control" style="width:130px;"><br>
+                </div>
+                <div class="form-group">
+                    <label for="Pontos">Pontos: </label>
+                    <input type="text" id="Pontos" name="Pontos" class="fw-bolder form-control" style="width:80px;"><br>
+                </div>
+                <div class="form-group">
+                    <label for="LinkCurso">Endereço do Curso</label>
+                    <input class="form-control" type="text" id="LinkCurso" name="LinkCurso">
+                </div>
+
+                <button type="button" onclick="alterarConteudo(event)" class="btn btn-outline-primary d-flex" style="margin-left: auto; margin-top: 10px">Enviar</button>
+            </form>
         </div>
     </div>
 </section>
