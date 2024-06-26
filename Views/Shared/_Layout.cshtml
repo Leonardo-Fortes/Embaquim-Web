@@ -8,29 +8,32 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Web_Embaquim.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow  " style="background: #0062a3;">
-            <div class="container-fluid ">
-                <a class="navbar-brand" asp-area="" asp-page="/Home"><img class="logo-index" src="~/imagens/logo2.png" alt="Logo Embaquim"><span style="padding: 20px"><strong>Embaquim</strong></span></a>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow" style="background: #0062a3;">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-page="/Home">
+                    <img class="logo-index" src="~/imagens/logo2.png" alt="Logo Embaquim">
+                    <span style="padding: 20px"><strong>Embaquim</strong></span>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-               
             </div>
         </nav>
     </header>
-    <div class="container-fluid " style="padding: 0; margin: 0;">
+    <div class="container-fluid" style="padding: 0; margin: 0;">
         <div class="row">
             <!-- Navegação Lateral -->
-            <inside class="col-md-3 col-lg-2 col-sm-1 d-md-block bg-light sidebar nav-inside">
+            <aside class="col-12 col-md-3 col-lg-2 bg-light d-md-block sidebar nav-inside min-vh-100">
                 <nav>
                     <!-- Inicio Perfil -->
-                    <div class="box-fundo-perfil d-flex ">
+                    <div class="box-fundo-perfil d-flex">
                         <div class="box-imagem rounded-circle overflow-hidden">
-                            <img src="~/imagens\perfil-teste.jfif" alt="Descrição da Imagem" style="width: 100%; height: 100%;">
+                            <img src="~/imagens/perfil-teste.jfif" alt="Descrição da Imagem" style="width: 100%; height: 100%;">
                         </div>
                         <div class="d-flex flex-column">
                             <div class="name-perfil">
@@ -42,22 +45,22 @@
                         </div>
                     </div>
                     <!-- Fim Perfil-->
-                    <div class="sidebar-sticky ">
-                        <ul class="nav flex-column ">
-                            <li class="nav-item ">
-                                <a class="nav-link  active" href="@Url.Action("Index","Home")">
+                    <div class="sidebar-sticky">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("Index", "Home")">
                                     Início
                                     <i class="fa-solid fa-house icon-position"></i>
                                 </a>
                             </li>
-                            <li class="nav-item ">
-                                <a class="nav-link  active" href="@Url.Action("Perfil","Home")">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="@Url.Action("Perfil", "Home")">
                                     Perfil
                                     <i class="fa-solid fa-user icon-position"></i>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-decoration" href="@Url.Action("ControleUsuario","Home")">
+                                <a class="nav-link link-decoration" href="@Url.Action("ControleUsuario", "Home")">
                                     Desafios
                                     <i class="fa-solid fa-fire icon-position"></i>
                                 </a>
@@ -74,28 +77,24 @@
                                     <i class="fa-solid fa-medal icon-position"></i>
                                 </a>
                             </li>
-
                             <!-- Adicione mais itens de navegação conforme necessário -->
                         </ul>
                     </div>
                 </nav>
-            </inside>
+            </aside>
 
             <!-- Conteúdo Principal -->
-            <main role="main" class="col-md-9  col-sm-11 col-lg-10 d-flex justify-content-center" style="padding: 0px;">
+            <main role="main" class="col-12 col-md-9 col-lg-10" style="padding: 0px;">
                 <div>
                     @RenderBody()
                 </div>
             </main>
-
         </div>
     </div>
-
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

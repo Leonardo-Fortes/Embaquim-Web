@@ -203,6 +203,15 @@ i {
     cursor: pointer;
 }
 
+.icon-rec {
+   position: relative; 
+   top: 20px;
+   left: 5px;
+   color: black;
+   font-size: 50px;
+   margin-left:15px;
+}
+
 .sidebar-sticky .nav-item .nav-link:hover .icon-position {
     color: darkblue;
 }
@@ -272,8 +281,8 @@ p {
 
 .icon-adduser {
     position: absolute;
-    top: -30px;
-    left: -90px;
+    top: -5px;
+    left: -75px;
     color: black;
     font-size: 40px;
 }
@@ -298,17 +307,21 @@ p {
         text-align: start; /*Nova linha adicionada*/
     }
 
+.reconhecer{
+    height: auto;
+    max-width: 100%;
+}
 
 .box-reconhecer {
-    margin: 1px 5px;
-    margin-left: 0px;
-    background: white;
-    width: 800px;
-    padding: 50px;
+   
+    box-shadow: 1px 5px 7px 1px rgba(0,0,0,0.2);
+    padding: 0px;
+    margin: 0px;
+    
 }
 
 .box-avisos {
-    width: 320px;
+   
     margin-left: auto;
     box-shadow: 1px 5px 7px 1px rgba(0,0,0,0.2);
 }
@@ -406,3 +419,12 @@ p {
 .input-cad input {
     width: 50vh;
 }
+
+.list-add-rec{
+    cursor: pointer;
+    
+}
+    .list-add-rec:hover {
+        color: white;
+        background: darkblue;        
+    }

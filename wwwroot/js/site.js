@@ -74,10 +74,18 @@ function EnviarCadastro() {
     const dataNascimento = document.getElementById('DataNasciCad').value;
     const funcao = document.getElementById('FuncaoCad').value;
     const email = document.getElementById('EmailCad').value;
+    const usuario = document.getElementById('UsuarioCad').value;
+    const senha = document.getElementById('SenhaCad').value;
+    const confSenha = document.getElementById('ConfSenhaUsuario').value;
+
 
     // Verificar se todos os campos foram preenchidos
-    if (!nome || !sobrenome || !cpf || !dataNascimento || !funcao || !email) {
+    if (!nome || !sobrenome || !cpf || !dataNascimento || !funcao || !email || !usuario || !senha || !confSenha) {
         alert("Por favor, preencha todos os campos.");
+        return;
+    }
+    if (confSenha != senha) {
+        alert("Confirmar senha deve estar igual a senha!");
         return;
     }
 
@@ -132,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                     <div class="d-flex justify-content-end">
                         <button type="button" class="btn btn-danger mx-2" onclick="recusarSolicitacao(${index})">Recusar</button>
-                        <button type="button" class="btn btn-primary d-flex">Aceitar</button>
+                        <button type="button" class="btn btn-primary d-flex" onclick="aceitarSolicitacao()">Aceitar</button>
                     </div>
                     <hr>
                 `;
@@ -145,4 +153,84 @@ function recusarSolicitacao(index) {
     solicitacoes.splice(index, 1);
     localStorage.setItem('solicitacoes', JSON.stringify(solicitacoes));
     window.location.reload();  // Recarrega a página para atualizar a lista
+}
+
+function aceitarSolicitacao() {
+    // Obter as solicitações do localStorage
+    const solicitacoes = JSON.parse(localStorage.getItem('solicitacoes')) || [];
+
+    // Verificar se há solicitações para enviar
+    if (solicitacoes.length === 0) {
+        alert("Nenhuma solicitação encontrada.");
+        return;
+    }
+
+    // Adicionar a variável extra (por exemplo, 'status') ao objeto a ser enviado
+    const dataToSend = {
+        Solicitacoes: solicitacoes,
+        Usuario: usuario,
+        Senha: senha
+    };
+
+    // Enviar dados para o controlador usando AJAX
+    $.ajax({
+        url: '/Home/PreCadastroUsuario',
+        type: 'POST',
+        data: JSON.stringify(dataToSend),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (response) {
+            if (response.success) {
+                console.log('Dados enviados com sucesso!');
+                alert("Alterado com sucesso");
+                // Limpar o localStorage após enviar os dados com sucesso
+                localStorage.removeItem('solicitacoes');
+            } else {
+                console.error('Erro na validação dos dados.');
+            }
+        },
+        error: function (error) {
+            console.error('Erro ao enviar dados:', error);
+        }
+    });
+}
+
+//Reconhecer
+
+function buscarUsuarios() {
+    //Cria o prefixo vinculado ao input onde o usuário vai fazer a busca
+    let prefixo = document.getElementById('buscaUsuario').value;
+
+    let lista = document.getElementById('listaUsuarios');
+    lista.innerHTML = '';
+
+    // quando prefixo for vazio, limpa a lista
+    if (prefixo === '') {
+        return; // Limpa a lista e não faz a chamada AJAX
+    }
+
+    $.ajax({
+        url: '/Home/BuscarUsuarios',
+        type: 'GET',
+        data: { prefixo: prefixo },
+        success: function (response) {
+            if (response.length === 0) {
+                lista.innerHTML = '<li>Nenhum usuário encontrado</li>';
+            } else {
+                response.forEach(function (usuario) {
+                    let li = document.createElement('li');
+                    li.className = 'list-group-item list-add-rec fw-bolder';
+                    li.textContent = usuario.name;
+                    li.onclick = function () {
+                        document.getElementById('buscaUsuario').value = usuario.name;
+                        lista.innerHTML = ''; // Limpa a lista após selecionar um usuário
+                    };
+                    lista.appendChild(li);
+                });
+            }
+        },
+        error: function (error) {
+            console.error('Erro ao buscar usuários:', error);
+        }
+    });
 }

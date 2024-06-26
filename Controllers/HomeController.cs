@@ -1,3 +1,4 @@
+using Azure.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -112,6 +113,18 @@ namespace Web_Embaquim.Controllers
         {
             return View();
         }
+        
+        [HttpGet]
+        public IActionResult BuscarUsuarios(string prefixo)
+        {
+            var usuarios = _context.Usuarios
+          .Where(u => EF.Functions.Like(u.Name, prefixo + "%"))
+          .Select(u => new { u.Id, u.Name })
+          .ToList();
+
+            return Json(usuarios);
+        }
+
         public IActionResult ControleUsuario()
         {
             return View();
@@ -120,14 +133,46 @@ namespace Web_Embaquim.Controllers
         [HttpPost]
         public IActionResult PreCadastroUsuario([FromBody] CadastroViewModel cadastro)
         {
-            if (cadastro == null)
+            if (cadastro == null || cadastro.solicitacao == null)
             {
-                return BadRequest();
+                return Json(new { success = false, message = "Dados inválidos" });
             }
 
-            // Aqui você pode salvar os dados em um banco de dados ou fazer o processamento necessário
+            if (ModelState.IsValid)
+            {
+                var newUsuario = new Usuario
+                {
+                    Name = cadastro.Usuario,
+                    Senha = cadastro.Senha
+                };
 
-            return Ok(new { status = "success" });
+                _context.Usuarios.Add(newUsuario);
+                _context.SaveChanges();
+
+                int newIdUsu = newUsuario.Id;
+
+                foreach (var solicitacao in cadastro.solicitacao)
+                {
+                    var newFunc = new Funcionarios
+                    {
+                        NomeFunc = solicitacao.NomeCad,
+                        SobrenomeFunc = solicitacao.SobrenomeCad,
+                        EmailFunc = solicitacao.EmailCad,
+                        CpfFunc = solicitacao.CpfCad,
+                        DataNascimento = solicitacao.DataNasciCad,
+                        Funcao = solicitacao.FuncaoCad,
+                        IdUsu = newIdUsu
+                    };
+
+                    _context.Funcionarios.Add(newFunc);
+                }
+
+                _context.SaveChanges();
+
+                return Ok(new { status = "success" });
+            }
+
+            return Json(new { success = false, message = "Model state is invalid" });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -14,6 +14,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         options.LoginPath = "/Acesso/Index"; // Caminho para a página de login
         options.AccessDeniedPath = "/Acesso/Index";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(60);  // Tempo de expiração
+        options.Cookie.HttpOnly = true;  // Tornar o cookie HttpOnly
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     });
 
 // Add services to the container.
