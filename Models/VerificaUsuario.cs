@@ -15,6 +15,9 @@
 
         public static int IdFunc { get; set; }
 
+        public int PontosDis { get; set; }
+
+        public int PontosRec { get; set; }
 
         public bool VerificaLogin()
         {
@@ -28,6 +31,34 @@
             if (usuarioFunc != null)
             {
                 IdFunc = usuarioFunc.Id;
+                var pontosFunc = _context.Funcionarios
+                    .Where(u => u.IdUsu == IdFunc)
+                    .Select(u => new
+                    {
+                        u.PontosDis,
+                        u.PontosRec
+                    })
+                    .FirstOrDefault();
+
+                // Verifica se pontosFunc é null antes de acessar PontosDis
+                if (pontosFunc == null || pontosFunc.PontosDis == null)
+                {
+                    PontosDis = 0;
+                }
+                else
+                {
+                    PontosDis = pontosFunc.PontosDis;
+                }
+
+                if (pontosFunc == null || pontosFunc.PontosRec == null)
+                {
+                    PontosRec = 0;
+                }
+                else
+                {
+                    PontosRec = pontosFunc.PontosRec;
+                }
+
                 return true;
             }
 

@@ -210,7 +210,7 @@ function buscarUsuarios() {
     }
 
     $.ajax({
-        url: '/Home/BuscarUsuarios',
+        url: '/Reconhecer/BuscarUsuarios',
         type: 'GET',
         data: { prefixo: prefixo },
         success: function (response) {
@@ -234,3 +234,36 @@ function buscarUsuarios() {
         }
     });
 }
+
+//Reconhecer Valor das medalhas
+document.addEventListener('DOMContentLoaded', function () {
+    const icons = document.querySelectorAll('.selectable-icon');
+    let selectedValue = null; // Variável para armazenar o valor do ícone selecionado
+    const messageBox = document.getElementById('message-box');
+
+    icons.forEach(icon => {
+        icon.addEventListener('click', function () {
+            // Remove a classe 'selected' de todos os ícones
+            icons.forEach(i => i.classList.remove('selected'));
+
+            // Adiciona a classe 'selected' ao ícone clicado
+            this.classList.add('selected');
+
+            // Obtém o valor do ícone clicado
+            selectedValue = this.getAttribute('data-value');
+            console.log('Ícone selecionado com valor:', selectedValue); // Exibe o valor no console
+        });
+
+        icon.addEventListener('mouseover', function (event) {
+            const message = this.getAttribute('data-message');
+            messageBox.innerHTML = message;
+            messageBox.style.display = 'block';
+            messageBox.style.left = event.pageX + 'px';
+            messageBox.style.top = event.pageY + 'px';
+        });
+
+        icon.addEventListener('mouseout', function () {
+            messageBox.style.display = 'none';
+        });
+    });
+});

@@ -1,0 +1,91 @@
+﻿@model Web_Embaquim.Models.CombinedViewModel;
+<section class="reconhecer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-9 box-reconhecer min-vh-100" style="padding: 20px;">
+                <div>
+                    <h1 class="d-flex justify-content-center my-3">Reconheça alguém</h1>
+                    <h3 class="py-3">Quem você quer reconhecer hoje?</h3>
+                    <div style="margin-left: 90px; position: relative;">
+                        <i class="fa-solid fa-user-plus icon-adduser"></i>
+                        <input class="form-control" type="text" id="buscaUsuario" oninput="buscarUsuarios()">
+                        <ul class="list-group " id="listaUsuarios"></ul>
+                    </div>
+                </div>
+
+                <div class="icon-container" style="margin-top: 30px; ">
+                    <h2>Escolha uma medalha para presentiar o seu escolhido!</h2>
+                    <i class="fa-regular fa-face-smile icon-rec icon-animed-1 selectable-icon" alt="Icone 1" data-value="1" data-message="Ser Amigável: Significa ser cordial, gentil e acolhedor, demonstrando interesse genuíno e empatia nas interações com os outros."></i>
+                    <i class="fa-regular fa-lightbulb icon-rec icon-animed-2 selectable-icon" alt="Icone 2" data-value="2" data-message="Ser Inovador: Envolve a capacidade de criar ou introduzir algo novo e original, seja em ideias, processos ou produtos, buscando constantemente melhorias e soluções criativas."></i>
+                    <i class="fa-solid fa-star icon-rec icon-animed-3 selectable-icon" alt="Icone 3" data-value="3" data-message="Ser Protagonista: Significa assumir responsabilidade e iniciativa em situações, sendo um líder ativo na condução de eventos ou circunstâncias importantes."></i>
+                    <i class="fa-solid fa-user-tie icon-rec icon-animed-4 selectable-icon" alt="Icone 4" style="margin-bottom: 25px" data-value="4" data-message="Profissionalismo: Refere-se à conduta ética, habilidades técnicas e comportamento adequado esperados em ambientes de trabalho, demonstrando comprometimento, competência e respeito."></i>
+                </div>
+                <div id="message-box" class="message-box"></div>
+
+                <hr style="margin-top: 20px; clear:both">
+                <div style="margin-top: 50px;">
+
+                    <h5 class="fw-bolder" style="padding-top: 50px; padding-bottom: 10px;">Deixe uma mensagem para expressar o seu reconhecimento</h5>
+                </div>
+                <div class="editor">
+
+                    <textarea class="input-text-placeholder " placeholder="Escreva aqui o comportamento que foi observado"></textarea>
+                </div>
+                <!-- Inicio Pontos Para Entregar -->
+                <section class="Pontos para entregar">
+                    <p class="fw-bolder py-3">Quantos pontos você quer distribuir ?</p>
+                    <div class="d-flex">
+                        <div class="">
+                            <p class="fw-bolder" style="margin-bottom: 0px; color: gray;">Pontos por Pessoa</p>
+                            <input class="form-control fw-bolder" style="border: 1px solid darkblue; text-align: center; width:150px" type="text" name="">
+                        </div>
+
+                        <div class="mx-4">
+                            <p class="fw-bolder " style="margin-bottom: 0px; color: gray;">Total de Pontos</p>
+                            <input class="form-control fw-bolder" type="text" placeholder="@Model.VerificaUsuario.PontosDis" style="border: 1px solid darkblue; width:120px; text-align: center;" disabled>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            <!-- Fim Pontos Para Entregar -->
+            <!-- FIM Reconheça Alguém -->
+            <!-- Inicio Conteúdo Lateral -->
+
+            <aside class="container px-3 box-avisos bg-white justify-content-center col-3 min-vh-100">
+                <h5 class="fw-bolder py-3 px-2" style="position: relative;">
+                    <i class="fa-solid fa-lightbulb" style="position: absolute; top: 18px; left: -10px; color: black;"></i>
+                    Dica para reconhecimento
+                </h5>
+                <hr>
+                <div>
+                    <p class="fw-bolder">Seja específico!</p>
+                    <p>
+                        Fale exatamente qual atividade a pessoa estava desempenhando e o motivo de você achar que ela deve ser reconhecida!
+                    </p>
+                    <div class="rec-aside my-4">
+                        <p class="text-danger"><strong>Evite:</strong> Parabéns pelo trabalho, gostei muito.</p>
+                        <p>
+                            <strong>Experimente:</strong>
+                            Durante um deslocamento de máterial fulano me ofereceu ajuda para carregarmos juntos, fiquem impressionado com a atitude.
+                        </p>
+                    </div>
+                    <hr />
+                    <p class="fw-bolder">Fuja do favoritismo!</p>
+                    <p>
+                       Evite reconhecimento baseado por aproximidade, reconheça fatos reais, comportamentos observados ou metas cumpridas! 
+                    </p>
+                    <div class="rec-aside my-4">
+                        <p class="text-danger"><strong>Evite:</strong> Parabéns pela pessoa incrivel que você é, adoro ter você ao meu lado.</p>
+                        <p>
+                            <strong>Experimente:</strong>
+                            Parabéns pela ideia apresentada ou Parabéns pela atitude tomada, nos trouxe ótimos resultados!
+                        </p>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+</section>
+

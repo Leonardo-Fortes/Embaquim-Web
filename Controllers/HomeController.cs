@@ -13,6 +13,7 @@ namespace Web_Embaquim.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly Context _context;
 
+
         public HomeController(ILogger<HomeController> logger, Context context)
         {
             _logger = logger;
@@ -46,7 +47,7 @@ namespace Web_Embaquim.Controllers
                     // Atualizar os campos do registro existente
                     cursoExistente.TemaCurso = model.Tema;
                     cursoExistente.DescCurso = model.Descricao;
-                    cursoExistente.DuracaoCurso = duracao; // Use the parsed TimeSpan
+                    cursoExistente.DuracaoCurso = duracao; 
                     cursoExistente.DataFim = model.DataFim;
                     cursoExistente.PontosCurso = model.Pontos;
                     cursoExistente.LinkCurso = model.LinkCurso;
@@ -81,22 +82,26 @@ namespace Web_Embaquim.Controllers
       
         public IActionResult Index()
         {
+
+            var verificaUsuario = new VerificaUsuario(_context);
             var curso = _context.Cursos.FirstOrDefault();
-           
-                var viewModel = new CursoViewModel
-                {
-                    Tema = curso.TemaCurso,
-                    Descricao = curso.DescCurso,
-                    DuracaoHr = curso.DuracaoCurso.ToString(@"hh\:mm"), // Converte TimeSpan para string no formato "hh:mm"
-                    DataFim = curso.DataFim,
-                    Pontos = curso.PontosCurso,
-                    LinkCurso = curso.LinkCurso
+            var viewModel = new CursoViewModel
+            {
+                Tema = curso.TemaCurso,
+                Descricao = curso.DescCurso,
+                DuracaoHr = curso.DuracaoCurso.ToString(@"hh\:mm"), // Converte TimeSpan para string no formato "hh:mm"
+                DataFim = curso.DataFim,
+                Pontos = curso.PontosCurso,
+                LinkCurso = curso.LinkCurso
 
-                };
-
-                return View(viewModel);
-            
-            
+            };
+            var combinedViewModel = new CombinedViewModel
+            {
+                VerificaUsuario = verificaUsuario,
+                CursoViewModel = viewModel
+            };
+            return View(combinedViewModel);
+             
         }
 
         public IActionResult Privacy()
@@ -109,22 +114,9 @@ namespace Web_Embaquim.Controllers
             return View();
         }
 
-        public IActionResult Reconhecer()
-        {
-            return View();
-        }
+     
         
-        [HttpGet]
-        public IActionResult BuscarUsuarios(string prefixo)
-        {
-            var usuarios = _context.Usuarios
-          .Where(u => EF.Functions.Like(u.Name, prefixo + "%"))
-          .Select(u => new { u.Id, u.Name })
-          .ToList();
-
-            return Json(usuarios);
-        }
-
+      
         public IActionResult ControleUsuario()
         {
             return View();

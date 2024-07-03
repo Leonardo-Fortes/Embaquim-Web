@@ -1,4 +1,4 @@
-﻿@model Web_Embaquim.Models.CursoViewModel; // Passando parametros do CursoViewModel para os input através do Razor
+﻿@model Web_Embaquim.Models.CombinedViewModel; // Passando parametros do CursoViewModel para os input através do Razor
 @{
     ViewData["Title"] = "Home";
 }
@@ -9,18 +9,18 @@
         <div class="row justify-content-evenly">
             <div class="col-lg-5  pontos-fundo text-center py-3">
                 <h4 class="fw-bolder">Pontos Para Distribuir</h4>
-                <h2 class="fw-bolder">320 Pontos</h2>
+                <h2 class="fw-bolder">@Model.VerificaUsuario.PontosDis Pontos</h2>
                 <div class="progress">
                     <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" style="width:100%;">
                         27/04/2024
                     </div>
                 </div>
                 <p>Você tem até o dia 27/04/2024 para distribuir os pontos</p>
-                <a href="@Url.Action("Reconhecer","Home")" type="button" class="btn btn-primary fw-bolder" style="width: 100%; margin-top: 25px;">Reconhecer alguém</a>
+                <a href="@Url.Action("Index","Reconhecer")" type="button" class="btn btn-primary fw-bolder" style="width: 100%; margin-top: 25px;">Reconhecer alguém</a>
             </div>
             <div class="col-lg-5 pontos-fundo text-center py-3">
                 <h4 class="fw-bolder">Você já Recebeu</h4>
-                <h2 class="fw-bolder">1000 Pontos</h2>
+                <h2 class="fw-bolder">@Model.VerificaUsuario.PontosRec Pontos</h2>
                 <p>Parabéns! Vamos ver o que dá para fazer com seus pontos.</p>
                 <button type="button" class="btn btn-primary fw-bolder" style="width: 100%; margin-top: 16px;">Trocar Por Recompensas</button>
             </div>
@@ -48,19 +48,19 @@
             <div class="col-8 text-center container-desafio " style="margin-top: 200px; margin-bottom: 100px;">
                 <div style="border: 1px solid white;  ">
                     <h5 class=" py-5">
-                        <strong>Tema: </strong><span id="AntTema">@Model.Tema</span>
+                        <strong>Tema: </strong><span id="AntTema">@Model.CursoViewModel.Tema</span>
                     </h5>
                 </div>
 
                 <div style="border: 1px solid white;" class="my-3">
                     <h5 class=" py-5 my-5">
-                        <strong>Descrição:</strong><span id="AntDescricao">@Model.Descricao</span>
+                        <strong>Descrição:</strong><span id="AntDescricao">@Model.CursoViewModel.Descricao</span>
                     </h5>
                 </div>
                 <div>
                     <div>
                         <p class="py-3">
-                            <a class="btn btn-outline-primary" id="AntLink" style="margin-top: 20px; border: 1px solid white; color: white" href="@Model.LinkCurso">Clique aqui para acessar o link</a>
+                            <a class="btn btn-outline-primary" id="AntLink" style="margin-top: 20px; border: 1px solid white; color: white" href="@Model.CursoViewModel.LinkCurso">Clique aqui para acessar o link</a>
                         </p>
                         <button onclick="abrirFormulario()" class="btn btn-info" style="margin-left: auto; height: 35px">Abrir Painel de Administração</button>
                     </div>
@@ -68,9 +68,9 @@
 
 
                 <div class="d-flex justify-content-between my-3">
-                    <span class="">Duração: <span id="AntDuracaoHr" class="fw-bolder" style="color: red;">@Model.DuracaoHr</span></span>
-                    <span class="" id="">Pontos:  <span id="AntPontos" class="fw-bolder " style="color: red;">@Model.Pontos</span></span>
-                    <span class="" id="">Prazo: <span id="AntDataFim" class="fw-bolder " style="color: red;">@Model.DataFim.ToString("dd/MM/yyyy")</span></span>
+                    <span class="">Duração: <span id="AntDuracaoHr" class="fw-bolder" style="color: red;">@Model.CursoViewModel.DuracaoHr</span></span>
+                    <span class="" id="">Pontos:  <span id="AntPontos" class="fw-bolder " style="color: red;">@Model.CursoViewModel.Pontos</span></span>
+                    <span class="" id="">Prazo: <span id="AntDataFim" class="fw-bolder " style="color: red;">@Model.CursoViewModel.DataFim.ToString("dd/MM/yyyy")</span></span>
                 </div>
             </div>
         </div>
