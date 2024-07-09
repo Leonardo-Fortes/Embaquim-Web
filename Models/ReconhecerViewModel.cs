@@ -3,12 +3,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Web_Embaquim.Models
 {
-   
+
     public class ReconhecerViewModel
     {
-       public DateTime Mes {  get; set; } = DateTime.Now;
+        public int IdFuncRec { get; set; }
 
-       
+        public int Medalha { get; set; }
 
+        public string? Nome { get; set; }
+
+        public int Pontos { get; set; }
+
+        public string? Msg { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿
+
 function abrirFormularioLogin() {
     document.getElementById("overlay-login").style.display = "block";
 }
@@ -98,7 +99,7 @@ function EnviarCadastro() {
     document.getElementById('userForm').reset();
 
     // Redirecionar para a página de solicitações
-    
+
 }
 
 
@@ -197,6 +198,10 @@ function aceitarSolicitacao() {
 
 //Reconhecer
 
+
+
+let idFunc = null;
+let nameFunc = null;
 function buscarUsuarios() {
     //Cria o prefixo vinculado ao input onde o usuário vai fazer a busca
     let prefixo = document.getElementById('buscaUsuario').value;
@@ -214,16 +219,22 @@ function buscarUsuarios() {
         type: 'GET',
         data: { prefixo: prefixo },
         success: function (response) {
+            console.log(response); // Adicione este log para verificar o JSON retornado
             if (response.length === 0) {
                 lista.innerHTML = '<li>Nenhum usuário encontrado</li>';
             } else {
                 response.forEach(function (usuario) {
                     let li = document.createElement('li');
                     li.className = 'list-group-item list-add-rec fw-bolder';
-                    li.textContent = usuario.name;
+                    li.textContent = usuario.nomeFunc;
                     li.onclick = function () {
-                        document.getElementById('buscaUsuario').value = usuario.name;
+                        document.getElementById('buscaUsuario').value = usuario.nomeFunc;
                         lista.innerHTML = ''; // Limpa a lista após selecionar um usuário
+                        idFunc = usuario.id; 
+                        nameFunc = usuario.nomeFunc;
+
+                        console.log('ID Func:', idFunc);
+                        console.log('Nome Func:', nameFunc);
                     };
                     lista.appendChild(li);
                 });
@@ -233,12 +244,15 @@ function buscarUsuarios() {
             console.error('Erro ao buscar usuários:', error);
         }
     });
+
 }
 
+
 //Reconhecer Valor das medalhas
+let selectValue = null;
 document.addEventListener('DOMContentLoaded', function () {
     const icons = document.querySelectorAll('.selectable-icon');
-    let selectedValue = null; // Variável para armazenar o valor do ícone selecionado
+    // Variável para armazenar o valor do ícone selecionado
     const messageBox = document.getElementById('message-box');
 
     icons.forEach(icon => {
@@ -267,3 +281,68 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const valorDefinidoInput = document.getElementById('pontosDis');
+    const valorUsuarioInput = document.getElementById('pontosEnv');
+
+    valorUsuarioInput.addEventListener('input', function () {
+        const valorDefinido = parseFloat(valorDefinidoInput.value);
+        let valorUsuario = parseFloat(valorUsuarioInput.value);
+
+        if (valorUsuario > valorDefinido || valorUsuario < 1) {
+            valorUsuarioInput.value = valorDefinido;
+            alert('Confira sua quantidade de pontos !');
+        }
+
+    });
+});
+
+function enviarReconhecer() {
+    const msgRec = document.getElementById("msgRec").value;
+    const pontosEnv = document.getElementById("pontosEnv").value;
+
+    console.log(msgRec);
+    console.log('Ícone selecionado com valor:', selectedValue)
+    console.log('Id selecionado', idFunc);
+
+    if (!msgRec || !selectedValue || !idFunc) {
+        alert("Por favor, preencha todos os campos.");
+        return;
+    }
+
+    //else if (pontosEnv === 0) {
+    //    alert("Por favor, insira a quantidade de pontos.");
+    //    return;
+    //}
+    else {
+        let data = {
+            IdFuncRec: idFunc,
+            Medalha: selectedValue,
+            Nome: nameFunc,
+            Pontos: pontosEnv,
+            Msg: msgRec
+        };
+
+        $.ajax({
+            url: '/Reconhecer/EnviarReconhecer',
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                if (response.success) {
+                    console.log('Dados enviados com sucesso!');
+                    alert("Alterado com sucesso");
+                    window.location.reload();
+                } else {
+                    console.error('Erro na validação dos dados.');
+                    alert(response.message); // Exibe a mensagem de erro retornada pelo servidor
+                }
+            },
+            error: function (error) {
+                console.error('Erro ao enviar dados:', error);
+            }
+        });
+    }
+}

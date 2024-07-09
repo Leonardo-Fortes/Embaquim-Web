@@ -9,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<VerificaUsuario>();
 builder.Services.AddScoped<Cursos>();
+builder.Services.AddScoped<CombinedViewModel>();
+builder.Services.AddScoped<VerificaUsuario>();
+builder.Services.AddScoped<Funcionarios>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {

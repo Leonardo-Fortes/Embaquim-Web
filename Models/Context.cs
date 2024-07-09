@@ -12,5 +12,8 @@ namespace Web_Embaquim.Models
         public DbSet<Cursos> Cursos { get; set; }
 
         public DbSet<Funcionarios> Funcionarios { get; set; }
+        public DbSet<Reconhecer> Reconhecer { get; set;}
+
+    
     }
 }

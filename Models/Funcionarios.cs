@@ -13,14 +13,9 @@ namespace Web_Embaquim.Models
         [Column("nomeFunc")]
         public string NomeFunc { get; set; }
 
-        [Column("sobrenomeFunc")]
-        public string SobrenomeFunc { get; set; }
-
         [Column("emailFunc")]
         public string EmailFunc { get; set; }
 
-        [Column("cpfFunc")]
-        public string CpfFunc { get; set; }
 
         [Column("dataNasc")]
         public DateTime DataNascimento { get; set; }
@@ -51,6 +46,7 @@ namespace Web_Embaquim.Models
         [Column("id_Usu")]
         public int IdUsu {  get; set; }
 
-        public Usuario Usuario { get; set; }
+
+        public ICollection<Reconhecer> Reconhecimentos { get; set; }
     }
 }

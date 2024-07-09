@@ -1,4 +1,5 @@
 ﻿@model Web_Embaquim.Models.CombinedViewModel;
+
 <section class="reconhecer">
     <div class="container-fluid">
         <div class="row">
@@ -29,23 +30,26 @@
                 </div>
                 <div class="editor">
 
-                    <textarea class="input-text-placeholder " placeholder="Escreva aqui o comportamento que foi observado"></textarea>
+                    <textarea id="msgRec" class="input-text-placeholder " placeholder="Escreva aqui o comportamento que foi observado"></textarea>
                 </div>
                 <!-- Inicio Pontos Para Entregar -->
                 <section class="Pontos para entregar">
                     <p class="fw-bolder py-3">Quantos pontos você quer distribuir ?</p>
                     <div class="d-flex">
                         <div class="">
-                            <p class="fw-bolder" style="margin-bottom: 0px; color: gray;">Pontos por Pessoa</p>
-                            <input class="form-control fw-bolder" style="border: 1px solid darkblue; text-align: center; width:150px" type="text" name="">
+                            <label class="fw-bolder" for="pontosEnv"style="margin-bottom: 0px; color: gray;">Pontos por Pessoa</label>
+                            <input type="number"id="pontosEnv" min="0" class="form-control fw-bolder" style="border: 1px solid darkblue; text-align: center; width:150px" type="text" name="">
                         </div>
 
                         <div class="mx-4">
-                            <p class="fw-bolder " style="margin-bottom: 0px; color: gray;">Total de Pontos</p>
-                            <input class="form-control fw-bolder" type="text" placeholder="@Model.VerificaUsuario.PontosDis" style="border: 1px solid darkblue; width:120px; text-align: center;" disabled>
+                            <label class="fw-bolder " for="pontosDis" style="margin-bottom: 0px; color: gray;">Total de Pontos</label>
+                            <input  id="pontosDis" class="form-control fw-bolder" type="number" value="@Model.FuncionarioViewModel.PontosDis" style="border: 1px solid darkblue; width:120px; text-align: center;" disabled>
                         </div>
                     </div>
                 </section>
+                <div>
+                    <button onclick="enviarReconhecer()" type="btn" class="btn btn-outline-info d-flex m-auto align-items-center justify-content-center">Enviar Reconhecimento!</button>
+                </div>
 
             </div>
             <!-- Fim Pontos Para Entregar -->

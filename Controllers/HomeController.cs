@@ -14,6 +14,7 @@ namespace Web_Embaquim.Controllers
         private readonly Context _context;
 
 
+
         public HomeController(ILogger<HomeController> logger, Context context)
         {
             _logger = logger;
@@ -83,7 +84,7 @@ namespace Web_Embaquim.Controllers
         public IActionResult Index()
         {
 
-            var verificaUsuario = new VerificaUsuario(_context);
+            var idFunc = VerificaUsuario.IdFunc;
             var curso = _context.Cursos.FirstOrDefault();
             var viewModel = new CursoViewModel
             {
@@ -95,10 +96,24 @@ namespace Web_Embaquim.Controllers
                 LinkCurso = curso.LinkCurso
 
             };
+            var pontos = _context.Funcionarios.Where(u => u.IdUsu == idFunc).Select(u => new
+            {
+                u.PontosDis,
+                u.PontosRec
+            }).FirstOrDefault();
+
+
+            var viewModelRec = new FuncionarioViewModel
+            {
+                PontosDis = pontos.PontosDis,
+                PontosRec = pontos.PontosRec
+            };
+
+
             var combinedViewModel = new CombinedViewModel
             {
-                VerificaUsuario = verificaUsuario,
-                CursoViewModel = viewModel
+                FuncionarioViewModel = viewModelRec,
+                CursoViewModel = viewModel,              
             };
             return View(combinedViewModel);
              
@@ -114,13 +129,13 @@ namespace Web_Embaquim.Controllers
             return View();
         }
 
-     
-        
-      
+
         public IActionResult ControleUsuario()
         {
             return View();
         }
+
+
 
         [HttpPost]
         public IActionResult PreCadastroUsuario([FromBody] CadastroViewModel cadastro)
@@ -148,9 +163,9 @@ namespace Web_Embaquim.Controllers
                     var newFunc = new Funcionarios
                     {
                         NomeFunc = solicitacao.NomeCad,
-                        SobrenomeFunc = solicitacao.SobrenomeCad,
+                     
                         EmailFunc = solicitacao.EmailCad,
-                        CpfFunc = solicitacao.CpfCad,
+                 
                         DataNascimento = solicitacao.DataNasciCad,
                         Funcao = solicitacao.FuncaoCad,
                         IdUsu = newIdUsu

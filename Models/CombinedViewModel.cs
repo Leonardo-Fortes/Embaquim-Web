@@ -2,7 +2,8 @@
 {
     public class CombinedViewModel
     {
-        public VerificaUsuario VerificaUsuario { get; set; }
+        public FuncionarioViewModel FuncionarioViewModel { get; set; }
         public CursoViewModel CursoViewModel { get; set; }
+
     }
 }
