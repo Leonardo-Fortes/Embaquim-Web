@@ -309,6 +309,30 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\leonardo\\source\\repos\\WebEmbaquim\\Web Embaquim\\wwwroot\\uploads\\default\\perfil-1.jfif",
+      "PackagePath": "staticwebassets\\uploads\\default\\perfil-1.jfif"
+    },
+    {
+      "Id": "C:\\Users\\leonardo\\source\\repos\\WebEmbaquim\\Web Embaquim\\wwwroot\\uploads\\default\\perfil-2.jfif",
+      "PackagePath": "staticwebassets\\uploads\\default\\perfil-2.jfif"
+    },
+    {
+      "Id": "C:\\Users\\leonardo\\source\\repos\\WebEmbaquim\\Web Embaquim\\wwwroot\\uploads\\default\\perfil-3.jfif",
+      "PackagePath": "staticwebassets\\uploads\\default\\perfil-3.jfif"
+    },
+    {
+      "Id": "C:\\Users\\leonardo\\source\\repos\\WebEmbaquim\\Web Embaquim\\wwwroot\\uploads\\default\\perfil-4.jfif",
+      "PackagePath": "staticwebassets\\uploads\\default\\perfil-4.jfif"
+    },
+    {
+      "Id": "C:\\Users\\leonardo\\source\\repos\\WebEmbaquim\\Web Embaquim\\wwwroot\\uploads\\default\\perfil-5.jfif",
+      "PackagePath": "staticwebassets\\uploads\\default\\perfil-5.jfif"
+    },
+    {
+      "Id": "C:\\Users\\leonardo\\source\\repos\\WebEmbaquim\\Web Embaquim\\wwwroot\\uploads\\default\\perfil-teste.jfif",
+      "PackagePath": "staticwebassets\\uploads\\default\\perfil-teste.jfif"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebEmbaquim.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

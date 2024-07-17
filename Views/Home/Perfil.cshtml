@@ -1,31 +1,65 @@
-﻿
-<section class="Alterar-perfil">
-    <div class="fundo-branco container " style="border-radius: 10px;">
-        <div class="row d-flex justify-content-between py-1">
-            <div class="box-imagem-perfil rounded-circle overflow-hidden d-flex col-2 " style="width: 100px; height: 100px; padding: 0px;">
-                <img class="" src="~/imagens\perfil-teste.jfif" alt="Descrição da Imagem" style="width: 100%; height:100%;">
-            </div>
-            <div class="d-flex  col-10 justify-content-between align-items-center ">
-                <div class="d-flex flex-column  ">
-                    <div class="fw-bolder">
-                        <h3>Leonardo Salimene Fortes</h3>
-                    </div>
-                    <div class="fw-bolder">
-                        <h5>Cargo: T.I</h5>
+﻿@using Web_Embaquim.Models;
+@inject SessionHelper SessionHelper;
+@model Web_Embaquim.Models.CombinedViewModel;
+@{
+    var fotoPerfil = SessionHelper.GetFotoPerfil();
+}
+<section class="alterar-perfil">
+    <div class="container-fluid ">
+        <div class="fundo-branco-perfil ">
+            <div class="d-flex ">
+                <div class="box-imagem-perfil rounded-circle overflow-hidden d-flex  box-foto-perfil">
+                    <img src="@fotoPerfil" alt="Foto de Perfil" class="img-perfil" style="width: 100%; height:100%;">
+
+                </div>
+                <div class="d-flex align-items-center ">
+                    <div class="d-flex flex-column  ">
+                        <div class="fw-bolder" style="margin-right: auto">
+                            <h3>@Model.FuncionarioViewModel.NomeFunc</h3>
+                        </div>
+                        <div class="fw-bolder">
+                            <h5>@Model.FuncionarioViewModel.Funcao</h5>
+                        </div>
                     </div>
                 </div>
+            </div>
+            <hr>
+            <div class="row d-flex ">
+                <div class="fw-bolder d-flex justify-content-between">
+                    <div class="">
+                        <h5>Pontos Distribuir: @Model.FuncionarioViewModel.PontosDis</h5>
+                    </div>
+                    <div class="">
+                        <h5>Pontos Reconhecidos: @Model.FuncionarioViewModel.PontosRec</h5>
+                    </div>
+                </div>
+                <div class="icon-container d-flex" style="margin-top: 20px; ">
+                    <div class="d-flex flex-column">
+                        <i class="fa-regular  fa-face-smile icon-rec-perfil selectable-icon" data-message="Ser Amigável: Significa ser cordial, gentil e acolhedor, demonstrando interesse genuíno e empatia nas interações com os outros."></i>
+                        <p class="m-auto fw-bolder p-med">@Model.FuncionarioViewModel.RecAmigavel</p>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <i class="fa-regular fa-lightbulb icon-rec-perfil selectable-icon" data-message="Ser Inovador: Envolve a capacidade de criar ou introduzir algo novo e original, seja em ideias, processos ou produtos, buscando constantemente melhorias e soluções criativas."></i>
+                        <p class="m-auto fw-bolder p-med">@Model.FuncionarioViewModel.RecInovador</p>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <i class="fa-solid fa-star icon-rec-perfil selectable-icon" data-message="Ser Protagonista: Significa assumir responsabilidade e iniciativa em situações, sendo um líder ativo na condução de eventos ou circunstâncias importantes."></i>
+                        <p class="m-auto fw-bolder p-med">@Model.FuncionarioViewModel.RecProtagonista</p>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <i class="fa-solid fa-user-tie icon-rec-perfil selectable-icon" data-message="Profissionalismo: Refere-se à conduta ética, habilidades técnicas e comportamento adequado esperados em ambientes de trabalho, demonstrando comprometimento, competência e respeito."></i>
+                        <p class="m-auto fw-bolder p-med">@Model.FuncionarioViewModel.RecProfissionalismo</p>
+                    </div>
+                </div>
+                <div id="message-box" class="message-box" style="width: 100vh"></div>
             </div>
         </div>
-        <hr>
-        <div class="row d-flex ">
-            <div class="fw-bolder d-flex justify-content-between">
-                <div class="">
-                    <h5>Pontos Distribuir: 100</h5>
-                </div>
-                <div class="">
-                    <h5>Pontos Reconhecidos: 1000</h5>
-                </div>
+        <div class="container-fluid">
+            <div id="dataContainer" style="display:none;">
+                <div id="dataItems"></div>
             </div>
         </div>
     </div>
+
 </section>
+

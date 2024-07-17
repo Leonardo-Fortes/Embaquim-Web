@@ -38,10 +38,9 @@ namespace Web_Embaquim.Models
 
         [Column("recMsg")]
         public string MSG { get; set; }
-
-       
-  
-
+        [Column("id_funcEnvio")]
+        public int IdFuncEnvio { get; set; }
+    
         public Funcionarios Funcionario { get; set; }
     }
 }

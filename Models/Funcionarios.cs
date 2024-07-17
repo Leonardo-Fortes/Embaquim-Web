@@ -16,7 +16,6 @@ namespace Web_Embaquim.Models
         [Column("emailFunc")]
         public string EmailFunc { get; set; }
 
-
         [Column("dataNasc")]
         public DateTime DataNascimento { get; set; }
 
@@ -24,10 +23,10 @@ namespace Web_Embaquim.Models
         public string Funcao { get; set; }
 
         [Column("pontosRec")]
-        public int PontosRec {  get; set; }
+        public int PontosRec { get; set; }
 
         [Column("pontosDis")]
-        public int PontosDis {  get; set; }
+        public int PontosDis { get; set; }
 
         [Column("recAmigavel")]
         public int RecAmigavel { get; set; }
@@ -40,13 +39,16 @@ namespace Web_Embaquim.Models
 
         [Column("recProfissionalismo")]
         public int RecProfissionalismo { get; set; }
+        [Column("fotoUrl")]
+        public string FotoUrl { get; set; }
 
-        [ForeignKey("id_Usu")]
-
+        [ForeignKey("Usuario")]
         [Column("id_Usu")]
-        public int IdUsu {  get; set; }
+        public int IdUsuario { get; set; }
 
+        public Usuario? Usuario { get; set; }
 
+        
         public ICollection<Reconhecer> Reconhecimentos { get; set; }
     }
 }

@@ -18,17 +18,19 @@ namespace Web_Embaquim.Controllers
         public IActionResult Index()
         {
             var idteste = VerificaUsuario.IdFunc;
-            var pontos = _context.Funcionarios.Where(u => u.IdUsu == idteste).Select(u => new
+            var pontos = _context.Funcionarios.Where(u => u.IdUsuario == idteste).Select(u => new
             {
                 u.PontosDis,
-                u.PontosRec
+                u.PontosRec,
+                u.NomeFunc
             }).FirstOrDefault();
 
 
             var viewModelRec = new FuncionarioViewModel
             {
                 PontosDis = pontos.PontosDis,
-                PontosRec = pontos.PontosRec
+                PontosRec = pontos.PontosRec,
+                NomeFunc = pontos.NomeFunc
             };
 
             var combinedViewModel = new CombinedViewModel
@@ -52,7 +54,7 @@ namespace Web_Embaquim.Controllers
         public IActionResult EnviarReconhecer([FromBody] ReconhecerViewModel recModel)
         {
             var nameFunc = _context.Funcionarios
-                .Where(u => u.IdUsu == VerificaUsuario.IdFunc)
+                .Where(u => u.IdUsuario == VerificaUsuario.IdFunc)
                 .Select(u => new { u.NomeFunc, u.Id })
                 .FirstOrDefault();
 
@@ -63,7 +65,13 @@ namespace Web_Embaquim.Controllers
             var validacao = _context.Reconhecer
                 .Any(u => u.NomeFunc == recModel.Nome
                           && u.Mes.Month == mes
-                          && u.Mes.Year == ano);
+                          && u.Mes.Year == ano && u.NomeFuncEnvio == nameFunc.NomeFunc);
+
+
+            var idFuncEnvio = _context.Funcionarios.Where(i => i.IdUsuario == VerificaUsuario.IdFunc).Select(i => new
+            {
+                i.Id
+            }).FirstOrDefault();
 
             if (validacao)
             {
@@ -105,7 +113,8 @@ namespace Web_Embaquim.Controllers
                     Amigavel = amigavel,
                     Inovador = inovador,
                     Protagonista = protagonista,
-                    Profissionalismo = profissionalismo
+                    Profissionalismo = profissionalismo,
+                    IdFuncEnvio = idFuncEnvio.Id
                 };
 
                 _context.Reconhecer.Add(reconhecer);
@@ -133,7 +142,7 @@ namespace Web_Embaquim.Controllers
                             break;
                     }
 
-                    var funcionarioEnv = _context.Funcionarios.FirstOrDefault(f => f.Id == VerificaUsuario.IdFunc);
+                    var funcionarioEnv = _context.Funcionarios.FirstOrDefault(f => f.IdUsuario == VerificaUsuario.IdFunc);
                     if (funcionarioEnv != null)
                     {
                         funcionarioEnv.PontosDis -= recModel.Pontos;

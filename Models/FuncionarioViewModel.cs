@@ -7,15 +7,15 @@ namespace Web_Embaquim.Models
     {
         public int Id { get; set; }
 
-        public string NomeFunc { get; set; }
+        public string? NomeFunc { get; set; }
 
 
-        public string EmailFunc { get; set; }
+        public string? EmailFunc { get; set; }
 
         public DateTime DataNascimento { get; set; }
 
 
-        public string Funcao { get; set; }
+        public string? Funcao { get; set; }
 
         public int PontosRec { get; set; }
 
@@ -36,6 +36,8 @@ namespace Web_Embaquim.Models
 
         public int IdUsu { get; set; }
 
-        public Usuario Usuario { get; set; }
+        public Usuario? Usuario { get; set; }
+
+        
     }
 }

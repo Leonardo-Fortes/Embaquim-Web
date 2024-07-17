@@ -7,11 +7,19 @@ using Web_Embaquim.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 builder.Services.AddScoped<VerificaUsuario>();
 builder.Services.AddScoped<Cursos>();
 builder.Services.AddScoped<CombinedViewModel>();
-builder.Services.AddScoped<VerificaUsuario>();
 builder.Services.AddScoped<Funcionarios>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<SessionHelper>();
+
+// Adicionar serviço AWS S3
+
+//builder.Services.AddAWSService<IAmazonS3>();
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -22,10 +30,18 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     });
 
+// Adicionar serviços de sessão
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Tempo de expiração da sessão
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<Context>(options => options.UseSqlServer("Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=WebRH;Data Source=PROG06-KALPA; TrustServerCertificate=True"));
-
 
 var app = builder.Build();
 
@@ -52,7 +68,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -60,6 +75,9 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Usar sessão
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

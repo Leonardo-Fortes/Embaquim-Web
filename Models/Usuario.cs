@@ -16,5 +16,6 @@ namespace Web_Embaquim.Models
         [Column("senha")]
         public string? Senha { get; set; }
 
+        public ICollection<Funcionarios>? Funcionarios { get; set; }
     }
 }

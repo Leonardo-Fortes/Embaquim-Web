@@ -99,102 +99,101 @@ function EnviarCadastro() {
     document.getElementById('userForm').reset();
 
     // Redirecionar para a página de solicitações
-
 }
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    const solicitacoesContainer = document.getElementById('solicitationsContainer');
-    const solicitacoes = JSON.parse(localStorage.getItem('solicitacoes')) || [];
+//document.addEventListener('DOMContentLoaded', function () {
+//    const solicitacoesContainer = document.getElementById('solicitationsContainer');
+//    const solicitacoes = JSON.parse(localStorage.getItem('solicitacoes')) || [];
 
-    solicitacoes.forEach((solicitacao, index) => {
-        const newForm = document.createElement('form');
-        newForm.className = 'input-cad';
-        newForm.innerHTML = `
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex flex-column">
-                            <label for="NomeCad">Nome </label>
-                            <input class="" type="text" name="NomeCad" value="${solicitacao.nome}" disabled><br>
-                        </div>
-                        <div class="d-flex flex-column">
-                            <label for="SobrenomeCad">Sobrenome </label>
-                            <input type="text" name="SobrenomeCad" value="${solicitacao.sobrenome}" disabled><br>
-                        </div>
-                        <div class="d-flex flex-column">
-                            <label for="CpfCad">CPF</label>
-                            <input type="text" name="CpfCad" value="${solicitacao.cpf}" disabled><br>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex flex-column">
-                            <label for="DataNasciCad">Data de nascimento</label>
-                            <input type="date" name="DataNasciCad" value="${solicitacao.dataNascimento}" disabled><br>
-                        </div>
-                        <div class="d-flex flex-column">
-                            <label for="FuncaoCad">Função </label>
-                            <input type="text" name="FuncaoCad" value="${solicitacao.funcao}" disabled><br>
-                        </div>
-                        <div class="d-flex flex-column">
-                            <label for="EmailCad">Email </label>
-                            <input type="email" name="EmailCad" value="${solicitacao.email}" disabled><br>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-danger mx-2" onclick="recusarSolicitacao(${index})">Recusar</button>
-                        <button type="button" class="btn btn-primary d-flex" onclick="aceitarSolicitacao()">Aceitar</button>
-                    </div>
-                    <hr>
-                `;
-        solicitacoesContainer.appendChild(newForm);
-    });
-});
+//    solicitacoes.forEach((solicitacao, index) => {
+//        const newForm = document.createElement('form');
+//        newForm.className = 'input-cad';
+//        newForm.innerHTML = `
+//                    <div class="d-flex justify-content-between">
+//                        <div class="d-flex flex-column">
+//                            <label for="NomeCad">Nome </label>
+//                            <input class="" type="text" name="NomeCad" value="${solicitacao.nome}" disabled><br>
+//                        </div>
+//                        <div class="d-flex flex-column">
+//                            <label for="SobrenomeCad">Sobrenome </label>
+//                            <input type="text" name="SobrenomeCad" value="${solicitacao.sobrenome}" disabled><br>
+//                        </div>
+//                        <div class="d-flex flex-column">
+//                            <label for="CpfCad">CPF</label>
+//                            <input type="text" name="CpfCad" value="${solicitacao.cpf}" disabled><br>
+//                        </div>
+//                    </div>
+//                    <div class="d-flex justify-content-between">
+//                        <div class="d-flex flex-column">
+//                            <label for="DataNasciCad">Data de nascimento</label>
+//                            <input type="date" name="DataNasciCad" value="${solicitacao.dataNascimento}" disabled><br>
+//                        </div>
+//                        <div class="d-flex flex-column">
+//                            <label for="FuncaoCad">Função </label>
+//                            <input type="text" name="FuncaoCad" value="${solicitacao.funcao}" disabled><br>
+//                        </div>
+//                        <div class="d-flex flex-column">
+//                            <label for="EmailCad">Email </label>
+//                            <input type="email" name="EmailCad" value="${solicitacao.email}" disabled><br>
+//                        </div>
+//                    </div>
+//                    <div class="d-flex justify-content-end">
+//                        <button type="button" class="btn btn-danger mx-2" onclick="recusarSolicitacao(${index})">Recusar</button>
+//                        <button type="button" class="btn btn-primary d-flex" onclick="aceitarSolicitacao()">Aceitar</button>
+//                    </div>
+//                    <hr>
+//                `;
+//        solicitacoesContainer.appendChild(newForm);
+//    });
+//});
 
-function recusarSolicitacao(index) {
-    const solicitacoes = JSON.parse(localStorage.getItem('solicitacoes')) || [];
-    solicitacoes.splice(index, 1);
-    localStorage.setItem('solicitacoes', JSON.stringify(solicitacoes));
-    window.location.reload();  // Recarrega a página para atualizar a lista
-}
+//function recusarSolicitacao(index) {
+//    const solicitacoes = JSON.parse(localStorage.getItem('solicitacoes')) || [];
+//    solicitacoes.splice(index, 1);
+//    localStorage.setItem('solicitacoes', JSON.stringify(solicitacoes));
+//    window.location.reload();  // Recarrega a página para atualizar a lista
+//}
 
-function aceitarSolicitacao() {
-    // Obter as solicitações do localStorage
-    const solicitacoes = JSON.parse(localStorage.getItem('solicitacoes')) || [];
+//function aceitarSolicitacao() {
+//    // Obter as solicitações do localStorage
+//    const solicitacoes = JSON.parse(localStorage.getItem('solicitacoes')) || [];
 
-    // Verificar se há solicitações para enviar
-    if (solicitacoes.length === 0) {
-        alert("Nenhuma solicitação encontrada.");
-        return;
-    }
+//    // Verificar se há solicitações para enviar
+//    if (solicitacoes.length === 0) {
+//        alert("Nenhuma solicitação encontrada.");
+//        return;
+//    }
 
-    // Adicionar a variável extra (por exemplo, 'status') ao objeto a ser enviado
-    const dataToSend = {
-        Solicitacoes: solicitacoes,
-        Usuario: usuario,
-        Senha: senha
-    };
+//    // Adicionar a variável extra (por exemplo, 'status') ao objeto a ser enviado
+//    const dataToSend = {
+//        Solicitacoes: solicitacoes,
+//        Usuario: usuario,
+//        Senha: senha
+//    };
 
-    // Enviar dados para o controlador usando AJAX
-    $.ajax({
-        url: '/Home/PreCadastroUsuario',
-        type: 'POST',
-        data: JSON.stringify(dataToSend),
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        success: function (response) {
-            if (response.success) {
-                console.log('Dados enviados com sucesso!');
-                alert("Alterado com sucesso");
-                // Limpar o localStorage após enviar os dados com sucesso
-                localStorage.removeItem('solicitacoes');
-            } else {
-                console.error('Erro na validação dos dados.');
-            }
-        },
-        error: function (error) {
-            console.error('Erro ao enviar dados:', error);
-        }
-    });
-}
+//    // Enviar dados para o controlador usando AJAX
+//    $.ajax({
+//        url: '/Home/PreCadastroUsuario',
+//        type: 'POST',
+//        data: JSON.stringify(dataToSend),
+//        contentType: 'application/json; charset=utf-8',
+//        dataType: 'json',
+//        success: function (response) {
+//            if (response.success) {
+//                console.log('Dados enviados com sucesso!');
+//                alert("Alterado com sucesso");
+//                // Limpar o localStorage após enviar os dados com sucesso
+//                localStorage.removeItem('solicitacoes');
+//            } else {
+//                console.error('Erro na validação dos dados.');
+//            }
+//        },
+//        error: function (error) {
+//            console.error('Erro ao enviar dados:', error);
+//        }
+//    });
+//}
 
 //Reconhecer
 
@@ -346,3 +345,33 @@ function enviarReconhecer() {
         });
     }
 }
+
+//Perfil
+
+$(document).ready(function () {
+    $.ajax({
+        url: '/Home/GetData',
+        type: 'GET',
+        success: function (data) {
+            console.log(data);
+            // Verifica se a resposta contém dados e se não há erro
+            if (Array.isArray(data) && data.length > 0) {
+                var content = '';
+                $.each(data, function (index, item) {
+                    content += '<div class="dataItem fundo-branco-comentario" style="margin-top: 40px; margin-bottom: 40px;">';
+                    content += '<div class="d-flex"><p><img src="' + item.fotoUrl + '" alt="Foto de Perfil" class="img-perfil-rec" style="width: 80px; height:80px">' + item.nome + '</p> <p style="margin-left: auto"><strong>Data:</strong> ' + item.data + '</p></div>';
+                    content += '<textarea style="color:black" id="msgRec" class="input-text-placeholder " disabled placeholder=" ' + item.texto + ' "></textarea>';
+                    content += '</div>';
+                });
+                $('#dataItems').html(content);
+                $('#dataContainer').show();
+            } else {
+                console.log('No data found or an error occurred');
+            }
+        },
+        error: function () {
+            console.log('Erro ao buscar dados.');
+        }
+    });
+});
+

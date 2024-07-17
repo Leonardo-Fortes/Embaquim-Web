@@ -1,4 +1,9 @@
-﻿@model Web_Embaquim.Models.CombinedViewModel;
+﻿@using Web_Embaquim.Models;
+@inject SessionHelper SessionHelper;
+@model Web_Embaquim.Models.CombinedViewModel;
+@{
+    var fotoPerfil = SessionHelper.GetFotoPerfil();
+}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -34,11 +39,11 @@
                     <!-- Inicio Perfil -->
                     <div class="box-fundo-perfil d-flex">
                         <div class="box-imagem rounded-circle overflow-hidden">
-                            <img src="~/imagens/perfil-teste.jfif" alt="Descrição da Imagem" style="width: 100%; height: 100%;">
+                            <img src="@fotoPerfil" alt="Descrição da Imagem" style="width: 100%; height: 100%;">
                         </div>
                         <div class="d-flex flex-column">
                             <div class="name-perfil">
-                                Leonardo
+                                @Model.FuncionarioViewModel.NomeFunc
                             </div>
                             <div class="pontuacao-perfil">
                                 Pontuação: @Model.FuncionarioViewModel.PontosRec
