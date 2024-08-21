@@ -1,11 +1,11 @@
-﻿namespace Web_Embaquim.Models
+﻿namespace Web_Embaquim.ViewModel
 {
     public class CadastroViewModel
     {
-        public List<Solicitacao> solicitacao {  get; set; }
+        public List<Solicitacao> solicitacao { get; set; }
         public string Usuario { get; set; }
         public string Senha { get; set; }
-    
+
     }
     public class Solicitacao
     {

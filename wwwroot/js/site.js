@@ -1,5 +1,5 @@
 ﻿
-
+//Curso Home
 function abrirFormularioLogin() {
     document.getElementById("overlay-login").style.display = "block";
 }
@@ -67,39 +67,39 @@ function alterarConteudo(event) {
 
 // Controle Usuário
 
-function EnviarCadastro() {
-    // Obter os valores do formulário
-    const nome = document.getElementById('NomeCad').value;
-    const sobrenome = document.getElementById('SobrenomeCad').value;
-    const cpf = document.getElementById('CpfCad').value;
-    const dataNascimento = document.getElementById('DataNasciCad').value;
-    const funcao = document.getElementById('FuncaoCad').value;
-    const email = document.getElementById('EmailCad').value;
-    const usuario = document.getElementById('UsuarioCad').value;
-    const senha = document.getElementById('SenhaCad').value;
-    const confSenha = document.getElementById('ConfSenhaUsuario').value;
+//function EnviarCadastro() {
+//    // Obter os valores do formulário
+//    const nome = document.getElementById('NomeCad').value;
+//    const sobrenome = document.getElementById('SobrenomeCad').value;
+//    const cpf = document.getElementById('CpfCad').value;
+//    const dataNascimento = document.getElementById('DataNasciCad').value;
+//    const funcao = document.getElementById('FuncaoCad').value;
+//    const email = document.getElementById('EmailCad').value;
+//    const usuario = document.getElementById('UsuarioCad').value;
+//    const senha = document.getElementById('SenhaCad').value;
+//    const confSenha = document.getElementById('ConfSenhaUsuario').value;
 
 
-    // Verificar se todos os campos foram preenchidos
-    if (!nome || !sobrenome || !cpf || !dataNascimento || !funcao || !email || !usuario || !senha || !confSenha) {
-        alert("Por favor, preencha todos os campos.");
-        return;
-    }
-    if (confSenha != senha) {
-        alert("Confirmar senha deve estar igual a senha!");
-        return;
-    }
+//    // Verificar se todos os campos foram preenchidos
+//    if (!nome || !sobrenome || !cpf || !dataNascimento || !funcao || !email || !usuario || !senha || !confSenha) {
+//        alert("Por favor, preencha todos os campos.");
+//        return;
+//    }
+//    if (confSenha != senha) {
+//        alert("Confirmar senha deve estar igual a senha!");
+//        return;
+//    }
 
-    // Armazenar os dados no localStorage
-    const solicitacoes = JSON.parse(localStorage.getItem('solicitacoes')) || [];
-    solicitacoes.push({ nome, sobrenome, cpf, dataNascimento, funcao, email });
-    localStorage.setItem('solicitacoes', JSON.stringify(solicitacoes));
+//    // Armazenar os dados no localStorage
+//    const solicitacoes = JSON.parse(localStorage.getItem('solicitacoes')) || [];
+//    solicitacoes.push({ nome, sobrenome, cpf, dataNascimento, funcao, email });
+//    localStorage.setItem('solicitacoes', JSON.stringify(solicitacoes));
 
-    // Limpar o formulário original
-    document.getElementById('userForm').reset();
+//    // Limpar o formulário original
+//    document.getElementById('userForm').reset();
 
-    // Redirecionar para a página de solicitações
-}
+//    // Redirecionar para a página de solicitações
+//}
 
 
 //document.addEventListener('DOMContentLoaded', function () {
@@ -246,6 +246,55 @@ function buscarUsuarios() {
 
 }
 
+//Barra de pesquisa
+
+function PesquisaPerfil() {
+    //Cria o prefixo vinculado ao input onde o usuário vai fazer a busca
+    let prefixo = document.getElementById('pesquisaPerfil').value;
+
+    let lista = document.getElementById('listaUsuariosPerfil');
+    lista.innerHTML = '';
+
+    // quando prefixo for vazio, limpa a lista
+    if (prefixo === '') {
+        return; // Limpa a lista e não faz a chamada AJAX
+    }
+
+    $.ajax({
+        url: '/Home/PesquisaPerfil',
+        type: 'GET',
+        data: { prefixo: prefixo },
+        success: function (response) {
+            console.log(response); // Adicione este log para verificar o JSON retornado
+            if (response.length === 0) {
+                lista.innerHTML = '<li>Nenhum usuário encontrado</li>';
+            } else {
+                response.forEach(function (usuario) {
+                    let li = document.createElement('li');
+                    li.className = 'list-group-item list-add-rec fw-bolder';
+                    li.textContent = usuario.nomeFunc;
+                    li.onclick = function () {
+                        document.getElementById('pesquisaPerfil').value = usuario.nomeFunc;
+                        lista.innerHTML = ''; // Limpa a lista após selecionar um usuário
+                        let idFunc = usuario.id;
+                        let nameFunc = usuario.nomeFunc;
+
+                        console.log('ID Func:', idFunc);
+                        console.log('Nome Func:', nameFunc);
+
+                        // Redireciona para a view Perfil passando o ID do usuário
+                        window.location.href = '/Perfil/Index?id=' + idFunc;
+                    };
+                    lista.appendChild(li);
+                });
+            }
+        },
+        error: function (error) {
+            console.error('Erro ao buscar usuários:', error);
+        }
+    });
+}
+
 
 //Reconhecer Valor das medalhas
 let selectValue = null;
@@ -281,6 +330,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+//Pontos Reconhecimento
 document.addEventListener('DOMContentLoaded', function () {
     const valorDefinidoInput = document.getElementById('pontosDis');
     const valorUsuarioInput = document.getElementById('pontosEnv');
@@ -297,6 +347,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+//Reconhecimento
 function enviarReconhecer() {
     const msgRec = document.getElementById("msgRec").value;
     const pontosEnv = document.getElementById("pontosEnv").value;
@@ -310,10 +361,6 @@ function enviarReconhecer() {
         return;
     }
 
-    //else if (pontosEnv === 0) {
-    //    alert("Por favor, insira a quantidade de pontos.");
-    //    return;
-    //}
     else {
         let data = {
             IdFuncRec: idFunc,
@@ -346,11 +393,11 @@ function enviarReconhecer() {
     }
 }
 
-//Perfil
+//Perfil Historico de Reconhecimento
 
 $(document).ready(function () {
     $.ajax({
-        url: '/Home/GetData',
+        url: '/Perfil/GetData',
         type: 'GET',
         success: function (data) {
             console.log(data);
@@ -359,8 +406,18 @@ $(document).ready(function () {
                 var content = '';
                 $.each(data, function (index, item) {
                     content += '<div class="dataItem fundo-branco-comentario" style="margin-top: 40px; margin-bottom: 40px;">';
-                    content += '<div class="d-flex"><p><img src="' + item.fotoUrl + '" alt="Foto de Perfil" class="img-perfil-rec" style="width: 80px; height:80px">' + item.nome + '</p> <p style="margin-left: auto"><strong>Data:</strong> ' + item.data + '</p></div>';
+                    content += '<div class="d-flex"><div class="d-flex"><img src="' + item.fotoUrl + '" alt="Foto de Perfil" class="img-perfil-rec rounded-circle" style="width: 80px; height:80px"><div class="d-flex flex-column justify-content-center fw-bolder" style="margin-left: 10px;"><span>' + item.nome + '</span> <span>' + item.cargo + '</span></div></div> <div class="d-flex flex-column justify-content-center"style="margin-left: auto"><span style="margin-left: auto"><strong>Data:</strong> ' + item.data + '</span> <span><strong>Pontos:</strong>'+ item.pontos + '</span></div></div>';
                     content += '<textarea style="color:black" id="msgRec" class="input-text-placeholder " disabled placeholder=" ' + item.texto + ' "></textarea>';
+                    switch (item.medalha) {
+                        case 'Coluna1': content +='<i class="fa-regular  fa-face-smile icon-rec-perfil selectable-icon" data-message="Ser Amigável: Significa ser cordial, gentil e acolhedor, demonstrando interesse genuíno e empatia nas interações com os outros."></i>';
+                        break;
+                        case 'Coluna2': content += '<i class="fa-regular fa-lightbulb icon-rec-perfil selectable-icon" data-message="Ser Inovador: Envolve a capacidade de criar ou introduzir algo novo e original, seja em ideias, processos ou produtos, buscando constantemente melhorias e soluções criativas."></i>';
+                            break;
+                        case 'Coluna3': content += '<i class="fa-solid fa-star icon-rec-perfil selectable-icon" data-message="Ser Protagonista: Significa assumir responsabilidade e iniciativa em situações, sendo um líder ativo na condução de eventos ou circunstâncias importantes."></i>';
+                            break;
+                        default: content += '<i class="fa-solid fa-user-tie icon-rec-perfil selectable-icon" data-message="Profissionalismo: Refere-se à conduta ética, habilidades técnicas e comportamento adequado esperados em ambientes de trabalho, demonstrando comprometimento, competência e respeito."></i>'
+                            break;
+                    }
                     content += '</div>';
                 });
                 $('#dataItems').html(content);
@@ -375,3 +432,98 @@ $(document).ready(function () {
     });
 });
 
+
+//Perfil Edição Imagem
+
+$(document).ready(function () {
+    var cropper;
+    var image = document.getElementById('image');
+
+    // Exibir a imagem no modal quando o arquivo é selecionado
+    $("#file").on("change", function (e) {
+        var files = e.target.files;
+        var done = function (url) {
+            image.src = url;
+            $('#cropModal').modal('show');
+        };
+        var reader;
+        var file;
+
+        if (files && files.length > 0) {
+            file = files[0];
+
+            if (URL) {
+                done(URL.createObjectURL(file));
+            } else if (FileReader) {
+                reader = new FileReader();
+                reader.onload = function (e) {
+                    done(reader.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    });
+
+    // Inicializar o Cropper.js quando o modal é exibido
+    $('#cropModal').on('shown.bs.modal', function () {
+        cropper = new Cropper(image, {
+            aspectRatio: 1, // Proporção 1:1 para foto de perfil
+            viewMode: 3,   // Controla o modo de visualização
+            preview: '.preview'
+        });
+    }).on('hidden.bs.modal', function () {
+        cropper.destroy();
+        cropper = null;
+    });
+
+    // Recortar e enviar a imagem quando o botão é clicado
+    $("#cropButton").on("click", function () {
+        var canvas;
+        if (cropper) {
+            canvas = cropper.getCroppedCanvas({
+                width: 300,
+                height: 300,
+            });
+            canvas.toBlob(function (blob) {
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function () {
+                    var base64data = reader.result;
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: '/Acesso/UploadImagem',
+                        data: { image: base64data },
+                        success: function (data) {
+                            if (data.success) {
+                                $('#cropModal').modal('hide');
+                                // Atualiza a imagem de perfil na página
+                                $('#profileImage').attr('src', data.imageUrl);
+                            } else {
+                                alert(data.message);
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                };
+            });
+        }
+    });
+});
+
+
+// aumentar a foto de perfil quando clicado
+
+$(document).ready(function () {
+    // Função para abrir o modal
+    function openModal() {
+        $('#profileModal').modal('show');
+    }
+
+    // Adiciona o evento click à imagem para abrir o modal
+    $('#perfilImg').on('click', function () {
+        openModal();
+    });
+});

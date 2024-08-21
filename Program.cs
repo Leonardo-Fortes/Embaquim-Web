@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using Web_Embaquim.Models;
+using Web_Embaquim.ViewModel;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,10 +24,10 @@ builder.Services.AddScoped<SessionHelper>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Acesso/Index"; // Caminho para a página de login
+        options.LoginPath = "/Acesso/Index";
         options.AccessDeniedPath = "/Acesso/Index";
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(60);  // Tempo de expiração
-        options.Cookie.HttpOnly = true;  // Tornar o cookie HttpOnly
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+        options.Cookie.HttpOnly = true;
         options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     });
 

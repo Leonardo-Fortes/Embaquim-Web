@@ -1,4 +1,4 @@
-namespace Web_Embaquim.Models
+namespace Web_Embaquim.ViewModel
 {
     public class ErrorViewModel
     {

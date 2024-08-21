@@ -333,6 +333,50 @@
       "PackagePath": "staticwebassets\\uploads\\default\\perfil-teste.jfif"
     },
     {
+      "Id": "C:\\Users\\leonardo\\source\\repos\\WebEmbaquim\\Web Embaquim\\wwwroot\\uploads\\user\\6c8a0056-14da-4fd9-a8f8-c87aee011443.png",
+      "PackagePath": "staticwebassets\\uploads\\user\\6c8a0056-14da-4fd9-a8f8-c87aee011443.png"
+    },
+    {
+      "Id": "C:\\Users\\leonardo\\source\\repos\\WebEmbaquim\\Web Embaquim\\wwwroot\\uploads\\user\\6c98a3af-1de3-4693-9702-9e1c3302cf76.png",
+      "PackagePath": "staticwebassets\\uploads\\user\\6c98a3af-1de3-4693-9702-9e1c3302cf76.png"
+    },
+    {
+      "Id": "C:\\Users\\leonardo\\source\\repos\\WebEmbaquim\\Web Embaquim\\wwwroot\\uploads\\user\\73720d48-d397-4780-bbde-394b57593c7e.png",
+      "PackagePath": "staticwebassets\\uploads\\user\\73720d48-d397-4780-bbde-394b57593c7e.png"
+    },
+    {
+      "Id": "C:\\Users\\leonardo\\source\\repos\\WebEmbaquim\\Web Embaquim\\wwwroot\\uploads\\user\\78a76637-75df-4aad-b8ee-3fea74fef100.png",
+      "PackagePath": "staticwebassets\\uploads\\user\\78a76637-75df-4aad-b8ee-3fea74fef100.png"
+    },
+    {
+      "Id": "C:\\Users\\leonardo\\source\\repos\\WebEmbaquim\\Web Embaquim\\wwwroot\\uploads\\user\\832c3cad-bf8b-4db7-afa2-1751dec2434e.png",
+      "PackagePath": "staticwebassets\\uploads\\user\\832c3cad-bf8b-4db7-afa2-1751dec2434e.png"
+    },
+    {
+      "Id": "C:\\Users\\leonardo\\source\\repos\\WebEmbaquim\\Web Embaquim\\wwwroot\\uploads\\user\\86707742-4c32-48e5-8e2b-57ce07cd733d.png",
+      "PackagePath": "staticwebassets\\uploads\\user\\86707742-4c32-48e5-8e2b-57ce07cd733d.png"
+    },
+    {
+      "Id": "C:\\Users\\leonardo\\source\\repos\\WebEmbaquim\\Web Embaquim\\wwwroot\\uploads\\user\\8e435ddd-80e6-4fa8-b76a-ac726752fd23.png",
+      "PackagePath": "staticwebassets\\uploads\\user\\8e435ddd-80e6-4fa8-b76a-ac726752fd23.png"
+    },
+    {
+      "Id": "C:\\Users\\leonardo\\source\\repos\\WebEmbaquim\\Web Embaquim\\wwwroot\\uploads\\user\\9ec5204e-1dfe-4fcb-be50-71a72e1b0492.png",
+      "PackagePath": "staticwebassets\\uploads\\user\\9ec5204e-1dfe-4fcb-be50-71a72e1b0492.png"
+    },
+    {
+      "Id": "C:\\Users\\leonardo\\source\\repos\\WebEmbaquim\\Web Embaquim\\wwwroot\\uploads\\user\\cabb833b-abec-4b0c-8941-33d7e60644fe.png",
+      "PackagePath": "staticwebassets\\uploads\\user\\cabb833b-abec-4b0c-8941-33d7e60644fe.png"
+    },
+    {
+      "Id": "C:\\Users\\leonardo\\source\\repos\\WebEmbaquim\\Web Embaquim\\wwwroot\\uploads\\user\\e8f16e00-2210-45a8-8ebf-fec25959911c.png",
+      "PackagePath": "staticwebassets\\uploads\\user\\e8f16e00-2210-45a8-8ebf-fec25959911c.png"
+    },
+    {
+      "Id": "C:\\Users\\leonardo\\source\\repos\\WebEmbaquim\\Web Embaquim\\wwwroot\\uploads\\user\\eedbea17-cb75-4b46-8b28-37be9162f9fc.png",
+      "PackagePath": "staticwebassets\\uploads\\user\\eedbea17-cb75-4b46-8b28-37be9162f9fc.png"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebEmbaquim.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

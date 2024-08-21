@@ -274,12 +274,30 @@ i {
     padding: 50px;
 }
 
+
 .box-foto-perfil {
+    position: relative;
     width: 100px;
     height: 100px;
-    padding: 0px;
+    padding: 0;
     margin-right: 10px;
 }
+
+.img-perfil {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer; /* Adiciona cursor pointer para indicar que é clicável */
+}
+
+
+
+.box-foto-perfil:hover {
+    opacity: 1; /* Torna a sobreposição visível ao passar o mouse */
+}
+
+
+/* Opcional: estilos para a imagem dentro do modal */
 
 p {
     margin-bottom: 5px;
@@ -401,7 +419,6 @@ p {
     transform: translate(-50%, -50%);
     "
 }
-
 .d-flex.justify-content-between b {
     color: red; /* Define a cor vermelha */
 }
@@ -459,10 +476,17 @@ p {
     width: 50vh;
 }
 
-.list-add-rec{
+.list-add-rec {
+    border-radius: 80px !important;
     cursor: pointer;
-    
+    z-index: 999;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    font-size: 15px;
+    height: auto;
+    width: 500px;
 }
+
+
 .list-add-rec:hover {
      color: white;
      background: darkblue;        
@@ -471,6 +495,14 @@ p {
     padding: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
+    border: 1px solid white;
+}
+
+
+.rec-aside-pesq {
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
     border: 1px solid white;
 }
 
@@ -534,4 +566,58 @@ textarea:disabled::placeholder {
 .img-perfis-rec {
     width: 20px;
     height: 20px;
+}
+
+#cropModal .modal-dialog {
+    max-width: 500px; /* Define uma largura máxima para o modal */
+    margin: 1.75rem auto; /* Centraliza o modal verticalmente */
+}
+
+#cropModal .modal-content {
+    border-radius: 0.5rem;
+}
+
+#cropModal .modal-body {
+    text-align: center; /* Centraliza o conteúdo dentro do modal */
+    overflow: hidden; /* Garante que o conteúdo não ultrapasse os limites do modal */
+    padding: 0; /* Remove padding para que a imagem ocupe todo o espaço */
+}
+
+/* Ajuste o tamanho da imagem */
+#cropModal #image {
+    max-width: 100%; /* Garante que a imagem não ultrapasse o modal */
+    max-height: 300px; /* Define uma altura máxima para a imagem */
+    width: auto; /* Mantém a proporção da imagem */
+    height: auto; /* Mantém a proporção da imagem */
+    display: block; /* Centraliza a imagem dentro do modal */
+    margin: 0 auto; /* Centraliza a imagem horizontalmente */
+}
+
+/* Ajuste a área de pré-visualização */
+.preview {
+    overflow: hidden;
+    width: 100%;
+    height: 150px; /* Altura da pré-visualização */
+    margin: 10px 0;
+}
+
+.preview img {
+    max-width: 100%;
+    height: auto;
+}
+.input-pesquisa {
+
+    border-radius: 30px;
+    outline: none;
+    border: none;
+    width: 500px;
+    color: black;
+    padding: 5px 40px;
+    height:auto;
+
+}
+
+.fa-magnifying-glass {
+    top: 10px;
+    left: -490px;
 }

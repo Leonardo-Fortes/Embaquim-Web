@@ -1,6 +1,5 @@
-﻿@using Web_Embaquim.Models;
-@inject SessionHelper SessionHelper;
-@model Web_Embaquim.Models.CombinedViewModel;
+﻿@inject SessionHelper SessionHelper;
+@model Web_Embaquim.ViewModel.CombinedViewModel;
 @{
     var fotoPerfil = SessionHelper.GetFotoPerfil();
 }
@@ -8,10 +7,29 @@
     <div class="container-fluid ">
         <div class="fundo-branco-perfil ">
             <div class="d-flex ">
-                <div class="box-imagem-perfil rounded-circle overflow-hidden d-flex  box-foto-perfil">
-                    <img src="@fotoPerfil" alt="Foto de Perfil" class="img-perfil" style="width: 100%; height:100%;">
-
+                <!-- Imagem de Perfil -->
+                <div class="box-imagem-perfil rounded-circle overflow-hidden d-flex box-foto-perfil">
+                    <img id="perfilImg" src="@Model.FuncionarioViewModel.FotoPerfil" alt="Foto de Perfil" class="img-perfil" style="cursor: pointer;">
                 </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="profileModalLabel">Foto de Perfil</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="@Model.FuncionarioViewModel.FotoPerfil" alt="Foto de Perfil Grande" style="width: 100%; height: auto;">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="d-flex align-items-center ">
                     <div class="d-flex flex-column  ">
                         <div class="fw-bolder" style="margin-right: auto">
@@ -54,6 +72,10 @@
                 <div id="message-box" class="message-box" style="width: 100vh"></div>
             </div>
         </div>
+            <div class="d-flex justify-content-center align-items-center">
+                <h1 class="align-text-center ">Histórico de Reconhecimentos</h1>
+            </div>     
+
         <div class="container-fluid">
             <div id="dataContainer" style="display:none;">
                 <div id="dataItems"></div>

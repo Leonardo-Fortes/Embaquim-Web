@@ -1,6 +1,6 @@
-﻿@using Web_Embaquim.Models;
+﻿@model Web_Embaquim.ViewModel.CombinedViewModel;
 @inject SessionHelper SessionHelper;
-@model Web_Embaquim.Models.CombinedViewModel;
+
 @{
     var fotoPerfil = SessionHelper.GetFotoPerfil();
 }
@@ -28,6 +28,12 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <div class="d-flex input-field justify-content-center" style="margin-left: auto; margin-right: auto; position: relative; z-index: 1;">
+                    <input type="text" class="input-pesquisa " name="pesquisa" placeholder="Buscar Perfil" id="pesquisaPerfil" oninput="PesquisaPerfil()" />
+                    <ul class="list-group" style="flex: none; display:block; position: absolute; top: 100%; left: 0; width: 100%;" id="listaUsuariosPerfil"></ul>
+                    <i class="fa-solid fa-magnifying-glass" style="position: relative; color: black"></i>
+                </div>
+
             </div>
         </nav>
     </header>
@@ -43,10 +49,10 @@
                         </div>
                         <div class="d-flex flex-column">
                             <div class="name-perfil">
-                                @Model.FuncionarioViewModel.NomeFunc
+                                @Model.FuncionarioViewModel.NomeFuncPerfil 
                             </div>
                             <div class="pontuacao-perfil">
-                                Pontuação: @Model.FuncionarioViewModel.PontosRec
+                                Pontuação: @Model.FuncionarioViewModel.PontosRecPerfil
                             </div>
                         </div>
                     </div>
@@ -60,7 +66,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="@Url.Action("Perfil", "Home")">
+                                <a class="nav-link active" href="@Url.Action("Index", "Perfil")">
                                     Perfil
                                     <i class="fa-solid fa-user icon-position"></i>
                                 </a>

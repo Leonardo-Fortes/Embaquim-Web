@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Threading.Tasks;
 using Web_Embaquim.Models;
+using Web_Embaquim.ViewModel;
 
 namespace Web_Embaquim.Controllers
 {
@@ -15,22 +18,26 @@ namespace Web_Embaquim.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var idteste = VerificaUsuario.IdFunc;
-            var pontos = _context.Funcionarios.Where(u => u.IdUsuario == idteste).Select(u => new
+            var pontos = await _context.Funcionarios.AsNoTracking().Where(u => u.IdUsuario == idteste).Select(u => new
             {
                 u.PontosDis,
                 u.PontosRec,
                 u.NomeFunc
-            }).FirstOrDefault();
+            }).FirstOrDefaultAsync();
 
+            if (idteste == 0)
+            {
+                return RedirectToAction("Index", "Acesso"); // Redireciona para a página de login se o idFunc não for válido ou curso não for encontrado
+            }
 
             var viewModelRec = new FuncionarioViewModel
             {
                 PontosDis = pontos.PontosDis,
-                PontosRec = pontos.PontosRec,
-                NomeFunc = pontos.NomeFunc
+                PontosRecPerfil = pontos.PontosRec,
+                NomeFuncPerfil = pontos.NomeFunc
             };
 
             var combinedViewModel = new CombinedViewModel
@@ -40,38 +47,46 @@ namespace Web_Embaquim.Controllers
 
             return View(combinedViewModel);
         }
+
         [HttpGet]
-        public IActionResult BuscarUsuarios(string prefixo)
+        public async Task<IActionResult> BuscarUsuarios(string prefixo)
         {
-            var usuarios = _context.Funcionarios
-          .Where(u => EF.Functions.Like(u.NomeFunc, prefixo + "%"))
-          .Select(u => new { u.Id, u.NomeFunc })
-          .ToList();
+            var idFunc = VerificaUsuario.IdFunc;
+            var currentUser = await _context.Funcionarios.AsNoTracking()
+                .Where(u => u.IdUsuario == idFunc)
+                .Select(u => u.NomeFunc)
+                .FirstOrDefaultAsync();
+            var usuarios = await _context.Funcionarios.AsNoTracking()
+                .Where(u => EF.Functions.Like(u.NomeFunc, prefixo + "%") && u.NomeFunc != currentUser)
+                .Select(u => new { u.Id, u.NomeFunc })
+                .ToListAsync();
 
             return Json(usuarios);
         }
+
+      
+
         [HttpPost]
-        public IActionResult EnviarReconhecer([FromBody] ReconhecerViewModel recModel)
+        public async Task<IActionResult> EnviarReconhecer([FromBody] ReconhecerViewModel recModel)
         {
-            var nameFunc = _context.Funcionarios
+            var nameFunc = await _context.Funcionarios.AsNoTracking()
                 .Where(u => u.IdUsuario == VerificaUsuario.IdFunc)
                 .Select(u => new { u.NomeFunc, u.Id })
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             int mes = DateTime.Now.Month;
             int ano = DateTime.Now.Year;
 
             // Consulta para verificar se existe um registro para o mesmo mês e ano
-            var validacao = _context.Reconhecer
-                .Any(u => u.NomeFunc == recModel.Nome
-                          && u.Mes.Month == mes
-                          && u.Mes.Year == ano && u.NomeFuncEnvio == nameFunc.NomeFunc);
+            var validacao = await _context.Reconhecer.AsNoTracking()
+                .AnyAsync(u => u.NomeFunc == recModel.Nome
+                               && u.Mes.Month == mes
+                               && u.Mes.Year == ano && u.NomeFuncEnvio == nameFunc.NomeFunc);
 
-
-            var idFuncEnvio = _context.Funcionarios.Where(i => i.IdUsuario == VerificaUsuario.IdFunc).Select(i => new
-            {
-                i.Id
-            }).FirstOrDefault();
+            var idFuncEnvio = await _context.Funcionarios.AsNoTracking()
+                .Where(i => i.IdUsuario == VerificaUsuario.IdFunc)
+                .Select(i => new { i.Id })
+                .FirstOrDefaultAsync();
 
             if (validacao)
             {
@@ -80,8 +95,6 @@ namespace Web_Embaquim.Controllers
 
             if (ModelState.IsValid)
             {
-            
-
                 // Variáveis para armazenar os valores das medalhas
                 int amigavel = 0, inovador = 0, protagonista = 0, profissionalismo = 0;
 
@@ -117,45 +130,42 @@ namespace Web_Embaquim.Controllers
                     IdFuncEnvio = idFuncEnvio.Id
                 };
 
-                _context.Reconhecer.Add(reconhecer);
-               
+                await _context.Reconhecer.AddAsync(reconhecer);
 
-                var funcionarioRec = _context.Funcionarios.FirstOrDefault(x => x.Id == recModel.IdFuncRec);
+                var funcionarioRec = await _context.Funcionarios.FirstOrDefaultAsync(x => x.Id == recModel.IdFuncRec);
 
                 // Atualizar os pontos do funcionário somando com os novos pontos
                 funcionarioRec.PontosRec += recModel.Pontos;
 
-                    // Atualizar as medalhas do funcionário
-                    switch (recModel.Medalha)
-                    {
-                        case 1:
-                            funcionarioRec.RecAmigavel += 1;
-                            break;
-                        case 2:
-                            funcionarioRec.RecInovador += 1;
-                            break;
-                        case 3:
-                            funcionarioRec.RecProtagonista += 1;
-                            break;
-                        default:
-                            funcionarioRec.RecProfissionalismo += 1;
-                            break;
-                    }
+                // Atualizar as medalhas do funcionário
+                switch (recModel.Medalha)
+                {
+                    case 1:
+                        funcionarioRec.RecAmigavel += 1;
+                        break;
+                    case 2:
+                        funcionarioRec.RecInovador += 1;
+                        break;
+                    case 3:
+                        funcionarioRec.RecProtagonista += 1;
+                        break;
+                    default:
+                        funcionarioRec.RecProfissionalismo += 1;
+                        break;
+                }
 
-                    var funcionarioEnv = _context.Funcionarios.FirstOrDefault(f => f.IdUsuario == VerificaUsuario.IdFunc);
-                    if (funcionarioEnv != null)
-                    {
-                        funcionarioEnv.PontosDis -= recModel.Pontos;
-                    }
+                var funcionarioEnv = await _context.Funcionarios.FirstOrDefaultAsync(f => f.IdUsuario == VerificaUsuario.IdFunc);
+                if (funcionarioEnv != null)
+                {
+                    funcionarioEnv.PontosDis -= recModel.Pontos;
+                }
 
-                    _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
-                    return Json(new { success = true });
-                
+                return Json(new { success = true });
             }
 
             return Json(new { success = false, message = "Invalid model state" });
         }
-
     }
 }

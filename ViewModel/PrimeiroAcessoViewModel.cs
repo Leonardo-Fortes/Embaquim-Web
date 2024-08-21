@@ -1,4 +1,6 @@
-﻿namespace Web_Embaquim.ViewModel
+﻿using System.Security.Principal;
+
+namespace Web_Embaquim.ViewModel
 {
     public class PrimeiroAcessoViewModel
     {

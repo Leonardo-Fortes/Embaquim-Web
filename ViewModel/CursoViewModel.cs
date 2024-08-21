@@ -1,4 +1,4 @@
-﻿namespace Web_Embaquim.Models
+﻿namespace Web_Embaquim.ViewModel
 {
     public class CursoViewModel
     {
@@ -9,5 +9,7 @@
         public int Pontos { get; set; }
 
         public string LinkCurso { get; set; }
+
+        public double ProgressPercentage { get; set; }
     }
 }

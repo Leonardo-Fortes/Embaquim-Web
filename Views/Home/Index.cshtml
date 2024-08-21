@@ -1,4 +1,4 @@
-﻿@model Web_Embaquim.Models.CombinedViewModel; // Passando parametros do CursoViewModel para os input através do Razor
+﻿@model Web_Embaquim.ViewModel.CombinedViewModel; // Passando parametros do CursoViewModel para os input através do Razor
 @{
     ViewData["Title"] = "Home";
 }
@@ -10,19 +10,14 @@
             <div class="col-lg-5  pontos-fundo text-center py-3">
                 <h4 class="fw-bolder">Pontos Para Distribuir</h4>
                 <h2 class="fw-bolder">@Model.FuncionarioViewModel.PontosDis Pontos</h2>
-                <div class="progress">
-                    <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" style="width:100%;">
-                        27/04/2024
-                    </div>
-                </div>
-                <p>Você tem até o dia 27/04/2024 para distribuir os pontos</p>
+                <p>Você tem até o dia @Model.CursoViewModel.DataFim.ToString("dd/MM/yyyy") para distribuir os pontos</p>
                 <a href="@Url.Action("Index","Reconhecer")" type="button" class="btn btn-primary fw-bolder" style="width: 100%; margin-top: 25px;">Reconhecer alguém</a>
             </div>
             <div class="col-lg-5 pontos-fundo text-center py-3">
                 <h4 class="fw-bolder">Você já Recebeu</h4>
-                <h2 class="fw-bolder">@Model.FuncionarioViewModel.PontosRec Pontos</h2>
+                <h2 class="fw-bolder">@Model.FuncionarioViewModel.PontosRecPerfil Pontos</h2>
                 <p>Parabéns! Vamos ver o que dá para fazer com seus pontos.</p>
-                <button type="button" class="btn btn-primary fw-bolder" style="width: 100%; margin-top: 16px;">Trocar Por Recompensas</button>
+                <button type="button" class="btn btn-primary fw-bolder" style="width: 100%; margin-top: 25px;">Trocar Por Recompensas</button>
             </div>
         </div>
     </div>
@@ -86,11 +81,11 @@
 
             <form method="post" style="width: 100%">
                 <div class="form-group">
-                    <label for="tema">Tema:</label>
+                    <label for="tema">Tema: </label>
                     <input type="text" id="Tema" name="Tema" class="fw-bolder form-control" style="width: 100%"><br>
                 </div>
                 <div class="form-group">
-                    <label for="descricao">Descricao:</label>
+                    <label for="descricao">Descricao: </label>
                     <input type="text" id="Descricao" name="Descricao" class="fw-bolder form-control" style="width: 100%"><br>
                 </div>
                 <div class="form-group">

@@ -1,9 +1,8 @@
-﻿namespace Web_Embaquim.Models
+﻿namespace Web_Embaquim.ViewModel
 {
     public class CombinedViewModel
     {
         public FuncionarioViewModel FuncionarioViewModel { get; set; }
-        public string FotoPerfil { get; set; }
         public CursoViewModel CursoViewModel { get; set; }
 
     }

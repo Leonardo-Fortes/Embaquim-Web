@@ -5,8 +5,9 @@ using Microsoft.Extensions.Hosting;
 using System.Security.Claims;
 using Web_Embaquim.Models;
 using Microsoft.AspNetCore.Hosting;
-using Web_Embaquim.ViewModel;
 using System.ComponentModel.DataAnnotations;
+using Web_Embaquim.ViewModel;
+using Microsoft.EntityFrameworkCore;
 
 namespace Web_Embaquim.Controllers
 {
@@ -30,8 +31,9 @@ namespace Web_Embaquim.Controllers
 
         [HttpPost]
         // Método para verificar login
-        public IActionResult ChecarLogin(string usuario, string senha)
+        public async Task<IActionResult> ChecarLoginAsync(string usuario, string senha)
         {
+            HttpContext.Session.Clear();
             var login = new VerificaUsuario(_context)
             {
                 Usuario = usuario,
@@ -39,40 +41,35 @@ namespace Web_Embaquim.Controllers
             };
 
             // Verifica se o login é válido
-            if (login.VerificaLogin())
-            {
-                // Cria uma lista de claims para autenticação
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, usuario)
-                };
-
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var authProperties = new AuthenticationProperties
-                {
-                    IsPersistent = true
-                };
-
-                // Sign in do usuário com cookie de autenticação
-                HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
-
-                // Busca o funcionário com base no ID do usuário
-                int idUsuario = VerificaUsuario.IdFunc;
-                var funcionario = _context.Funcionarios.FirstOrDefault(f => f.IdUsuario == idUsuario);
-
-                // Se o funcionário for encontrado, armazena a URL da foto na sessão
-                if (funcionario != null)
-                {
-                    HttpContext.Session.SetString("FotoPerfil", funcionario.FotoUrl ?? "/uploads/default/default.jpg");
-                }
-
-                return RedirectToAction("Index", "Home");
-            }
-            else
+            if (!login.VerificaLogin())
             {
                 TempData["MensagemErro"] = "Usuário ou senha inválidos";
                 return RedirectToAction("Index");
             }
+
+            // Cria uma lista de claims para autenticação
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, usuario)
+            };
+
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var authProperties = new AuthenticationProperties
+            {
+                IsPersistent = true,
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10)  // Ajuste o tempo de expiração conforme necessário
+            };
+
+            // Sign in do usuário com cookie de autenticação
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+
+            // Busca o funcionário com base no ID do usuário
+            int idUsuario = VerificaUsuario.IdFunc;
+          
+
+       
+
+            return RedirectToAction("Index", "Home");
         }
 
         // Método para exibir a página de primeiro acesso
@@ -91,64 +88,63 @@ namespace Web_Embaquim.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
+
         // Método para upload de foto
-        public async Task<IActionResult> UploadFoto(IFormFile file)
+        [HttpPost]
+        public async Task<IActionResult> UploadImagemAsync(string image)
         {
-            // Verifica se o arquivo foi selecionado
-            if (file == null || file.Length == 0)
+            // Verifica se a imagem foi enviada
+            if (string.IsNullOrEmpty(image))
             {
-                return Content("Arquivo não selecionado");
+                return Json(new { success = false, message = "Imagem não enviada" });
             }
 
-            // Validações de tamanho e tipo de arquivo
-            if (file.Length > 2 * 1024 * 1024) // Limite de 2 MB
+            // Remove o prefixo "data:image/png;base64," ou similar
+            var data = image.Substring(image.IndexOf(",") + 1);
+            byte[] imageBytes = Convert.FromBase64String(data);
+
+            // Verifica o tamanho da imagem
+            if (imageBytes.Length > 2 * 1024 * 1024) // Limite de 2 MB
             {
-                return Content("Arquivo muito grande. O limite é de 2 MB.");
+                return Json(new { success = false, message = "Arquivo muito grande. O limite é de 2 MB." });
             }
 
-            var permittedExtensions = new[] { ".jpg", ".jpeg", ".png" };
-            var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
-
-            if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
-            {
-                return Content("Tipo de arquivo inválido. Apenas .jpg, .jpeg e .png são permitidos.");
-            }
-
-            // Caminho onde o arquivo será salvo
+            // Define o nome único do arquivo
+            var uniqueFileName = Guid.NewGuid().ToString() + ".png"; // Salva como PNG
             var uploadsFolder = Path.Combine(_hostEnvironment.WebRootPath, "uploads", "user");
+
+            // Cria o diretório se ele não existir
             if (!Directory.Exists(uploadsFolder))
             {
                 Directory.CreateDirectory(uploadsFolder);
             }
 
-            var uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
             var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-            // Salva o arquivo no diretório especificado
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
-            }
+            // Salva o arquivo no caminho especificado
+            await System.IO.File.WriteAllBytesAsync(filePath, imageBytes);
 
             // Atualiza a URL da foto do funcionário
-            var idFunc = VerificaUsuario.IdFunc;
-            var funcionario = _context.Funcionarios.FirstOrDefault(f => f.Id == idFunc);
+            var usuarioId = VerificaUsuario.IdFunc;
+            var funcionario = await _context.Funcionarios.FirstOrDefaultAsync(f => f.IdUsuario == usuarioId);
 
             if (funcionario != null)
             {
                 funcionario.FotoUrl = "/uploads/user/" + uniqueFileName;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
 
-            return RedirectToAction("Perfil"); // Redireciona para a ação que mostra o perfil do funcionário
+            return Json(new { success = true, imageUrl = funcionario.FotoUrl });
         }
 
+
+
+
         // Método para escolher uma foto predefinida
-        public IActionResult EscolherFotoPreDefinida(string fotoNome)
+        public async Task<IActionResult> EscolherFotoPreDefinidaAsync(string fotoNome)
         {
             var usuarioId = VerificaUsuario.IdFunc;
-            var funcionario = _context.Funcionarios.FirstOrDefault(f => f.IdUsuario == usuarioId);
+            var funcionario = await _context.Funcionarios.FirstOrDefaultAsync(f => f.IdUsuario == usuarioId);
             if (funcionario == null)
             {
                 // Log para verificar o motivo da falha
@@ -161,7 +157,7 @@ namespace Web_Embaquim.Controllers
 
             try
             {
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {

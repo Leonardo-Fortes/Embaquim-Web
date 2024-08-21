@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\uploads\user\860aebab-2998-486e-b563-7b6d6ecf864b_homem-roxo-com-cabelo-azul_24877-82003.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\Imagens\" />
     <Folder Include="wwwroot\uploads\user\" />
   </ItemGroup>

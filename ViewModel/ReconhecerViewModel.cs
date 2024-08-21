@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Web_Embaquim.Models
+namespace Web_Embaquim.ViewModel
 {
 
     public class ReconhecerViewModel
